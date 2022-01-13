@@ -178,7 +178,7 @@
         $('#guardar-compra').click(function(){
             let proveedor_id = $('#c-pro-id').val();
             let usuario_id = JSON.parse(sessionStorage.getItem('sesion')).id;
-            let numero_compra =  $('#c-c-codigo').val();
+          //   let numero_compra =  $('#c-c-codigo').val(); 
             let fecha_compra =$('#c-c-fechac').val();
             let descuento=$('#compra-descuento-input').val();
             let subtotal= $('#compra-subtotal').text();
@@ -191,7 +191,6 @@
                 compra:{
                     proveedor_id,
                     usuario_id,
-                    numero_compra,
                     descuento,
                     subtotal,
                     iva,
@@ -420,3 +419,5 @@ function reset_datos(){
     $('#compra-descuento').text('0.00');
     $('#compra-totalg').text('0.00');
 }
+
+

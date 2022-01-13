@@ -13,6 +13,7 @@ $(function () { */
         get_HorariosAtencion(); 
         cargarTabla(); 
         editandohorasDoctorModal();
+        //cargar_hora();
     }
 
     function cargarTabla(){
@@ -96,22 +97,89 @@ $(function () { */
          $('#form-horario-doctor').submit(function(e){
            e.preventDefault();
       
-           let horaE = $('#hora-entrada').val();
-           let horaS=  $('#hora-salida').val();
+           let horaE = $('#hora-entrada').val();//18:00
+           let horaS=  $('#hora-salida').val();//19:00
            let fecha= $('#fecha-doctor').val();
-         
-           let json = {
-            horario_atencion:{
-                horaE,
-                horaS,
-                fecha   
-               }
-           };
-           //console.log(json);
-           guardandoHorarioAtencion(json);
+           let intervalo= $('#hora-intervalo').val();
+
+
+           //let intervalo =$('#hora-intervalo').val(); //30 min
+
+           let hoy = moment().get('year')+'-'+(moment().get('month')+1)+'-'+moment().get('date') + ' ' + '7:00:00';
+        
            
+           let horaIni = horaE; 
+           let horaFin = horaS;
+            if(moment(hoy).isAfter(horaIni)){
+                toastr.options = {
+                    "closeButton": true,
+                    "preventDuplicates": true,
+                    "positionClass": "toast-top-center",
+                };
+                toastr["error"]("La Hora Inicio no puede ser menor a la de Hoy");
+         
+            }else if(moment(horaIni).isAfter(horaFin)){ 
+                toastr.options = {
+                    "closeButton": true,
+                    "preventDuplicates": true,
+                    "positionClass": "toast-top-center",
+                };
+                toastr["error"]( "La hora Fin no puede ser menor a la de Inicio")
+            }else {
+                let json = {
+                    horario_atencion:{
+                        horaE,
+                        horaS,
+                        fecha,
+                        intervalo 
+                       }
+                   };
+                   console.log(json);
+                   guardandoHorarioAtencion(json);
+            }
+          // console.log(hoy);
         });
     }
+
+    //ejemplo
+   
+    
+
+    /* function calcularIntervalo(hora_ini,hora_fin,intervalo){
+
+        for (let index = 0; index < array.length; index++) {
+            const element = array[index];
+            
+        }
+
+    }  */   
+
+    /* function cargar_hora(){
+        let hoy = moment().get('year')+'-'+(moment().get('month')+1)+'-'+moment().get('date') + ' ' + '7:00:00';
+        update_fecha_inicio();
+
+        function update_fecha_inicio(){
+            $('#fecha-doctor').blur(function(){
+                let fecha = $('#fecha-doctor').val();
+             console.log(fecha);
+            });
+        }
+        update_hora_inicio();
+        function update_hora_inicio(){
+            $('#hora-entrada').blur(function(){
+                let horaE = $('#hora-entrada').val();
+                console.log(horaE);
+            });
+        }
+        update_fecha_fin();
+        function update_fecha_fin(){
+            $('#hora-salida').blur(function(){
+                let horaS = $('#hora-salida').val();
+                console.log(horaS);
+            });
+        }
+     
+    } */
 
     function guardandoHorarioAtencion(json){
         $.ajax({
@@ -262,7 +330,7 @@ $(function () { */
             // el tipo de información que se espera de respuesta
             dataType : 'json',
             success : function(response) {
-                console.log(response);
+             //   console.log(response);
                 if(response.status){
                     let tr = '';
                     let i = 1;

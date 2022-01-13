@@ -3,12 +3,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Citas Atendidas</h1>
+                <h1 class="m-0">Citas Canceldas</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Ver Citas</a></li>
-                    <li class="breadcrumb-item active">Atendidas</li>
+                    <li class="breadcrumb-item active">Canceldas</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -19,7 +19,7 @@
 <!-- Main content -->
 <div class="content">
     <div class="container-fluid">
-        <div class="row" id="citas-atendidas">
+        <div class="row" id="citas-canceladas">
             <!--   <div class="col-md-3 col-sm-6 col-12">
                 <div class="info-box bg-gradient-warning">
                     <span class="info-box-icon"><i class="far fa-calendar-alt"></i></span>
@@ -50,12 +50,13 @@
             </div> -->
 
         </div>
-
-    </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
 </div>
 <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
 
+
 <script src="<?=BASE?>views/plugins/Toast/js/Toast.min.js"></script>
-<script src="<?=BASE?>views/dist/js/scripts/citasAtendidas.js"></script>
+<script src="<?=BASE?>views/dist/js/scripts/citasCanceladas.js"></script>

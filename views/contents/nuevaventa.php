@@ -3,12 +3,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Realizar Compras</h1>
+                    <h1 class="m-0">Realizar Ventas</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Compras</a></li>
-                        <li class="breadcrumb-item active">Nueva Compra</li>
+                        <li class="breadcrumb-item"><a href="#">Ventas</a></li>
+                        <li class="breadcrumb-item active">Nueva Ventas</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -36,27 +36,28 @@
                                 <div class="row mb-3">
                                     <div class="col-8">
                                         <div class="form-group row">
-                                            <label class="col-3 col-sm-4 col-form-label">R.U.C :</label>
+                                            <label class="col-3 col-sm-4 col-form-label">Cedula :</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="ruc" readOnly
-                                                    class="form-control form-control-sm" id="c-pro-ruc">
+                                                <input type="text" name="cedula" readOnly
+                                                    class="form-control form-control-sm" id="c-venta-cedula">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <button class="btn btn-primary btn-sm" id="buscar-marca" data-toggle="modal"
-                                            data-target="#modal-cargar-proveedores" data-backdrop="static"
+                                            data-target="#modal-cargar-cliente" data-backdrop="static"
                                             data-keyboard="false"><i class="fa fa-search mr-2"></i>Buscar
-                                            Proveedor</button>
+                                            Cliente </button>
                                     </div>
                                 </div>
 
 
                                 <div class="form-group row">
-                                    <input type="hidden" id="c-pro-id">
-                                    <label class="col-sm-4 col-form-label">Razon Social :</label>
+                                    <input type="hidden" id="c-cli-id">
+                        
+                                    <label class="col-sm-4 col-form-label">Cliente :</label>
                                     <div class="col-sm-8">
-                                        <input id="c-pro-razon" readOnly type="text" name="razon"
+                                        <input id="c-venta-nombre" readOnly type="text" name="nombre"
                                             class="form-control form-control-sm" maxlength="200" minlength="3">
                                     </div>
                                 </div>
@@ -64,22 +65,22 @@
                                 <div class="form-group row">
                                     <label class="col-sm-4 col-form-label">Direccion :</label>
                                     <div class="col-sm-8">
-                                        <input id="c-pro-direccion" readOnly type="text" name="direccion"
+                                        <input id="c-venta-direccion" readOnly type="text" name="direccion"
                                             class="form-control form-control-sm" maxlength="200" minlength="3">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Fecha Compra :</label>
+                                <!--    <div class="form-group row">
+                                     <label class="col-sm-4 col-form-label">Fecha Venta :</label>
                                     <div class="col-sm-8">
                                         <input id="c-c-fechac" type="date" name="fechac"
                                             class="form-control form-control-sm">
 
-                                    </div>
-                                </div>
+                                    </div> 
+                                </div> -->
                                 <div class="form-group row">
                                     <label class="col-sm-4  col-form-label">Descuento :</label>
                                     <div class="col-sm-8">
-                                        <input id="compra-descuento-input" type="text" value="0.00"
+                                        <input id="venta-descuento-input" type="text" value="0.00"
                                             class="form-control form-control-sm">
                                     </div>
                                 </div>
@@ -93,20 +94,26 @@
                                     <div class="card card-danger ">
                                         <div class="card-header ">
                                             <h3 class="card-title"> <span style="text-align: center">DATOS DE
-                                                    COMPRA</span></h3>
+                                                    VENTA</span></h3>
                                         </div>
                                         <div class="card-body">
                                             <div class="row ">
                                                 <div class="col-6   form-group">
-                                                    <label>Codigo :</label>
-                                                    <input id="c-c-codigo" type="text" name="codigo"
+                                                    <label>Fecha Venta :</label>
+
+                                                    <input id="c-v-fechac" type="date" name="fechav"
                                                         class="form-control form-control-sm">
+
+
+                                                    <!--   <label>Codigo :</label>
+                                                    <input id="c-c-codigo" type="text" name="codigo"
+                                                        class="form-control form-control-sm"> -->
                                                 </div>
 
                                                 <div class="col-6  form-group">
 
                                                     <label for="">Usuario :</label>
-                                                    <input id="c-c-usuario" readOnly type="text" name="usuario"
+                                                    <input id="c-v-usuario" readOnly type="text" name="usuario"
                                                         class="form-control form-control-sm">
                                                 </div>
                                             </div>
@@ -133,12 +140,12 @@
                         <input type="hidden" id="producto-id">
                         <div class="row ">
                             <div class="col-5  form-group">
-                                <label>Codigo </label>
-                                <input id="detalle-compras-codigo" type="text" readOnly class="form-control">
+                                <label>Codigo de Producto</label>
+                                <input id="detalle-venta-codigo" type="text" readOnly class="form-control">
                             </div>
                             <div class="col-5  form-group">
                                 <label>Nombre</label>
-                                <input id="detalle-compras-nombre" type="text" readOnly class="form-control">
+                                <input id="detalle-venta-nombre" type="text" readOnly class="form-control">
                             </div>
                             <div class="col-2  form-group">
                                 <button class="btn btn-primary mb-2" style="margin-top: 31px;" data-toggle="modal"
@@ -149,15 +156,15 @@
                         <div class="row ">
                             <div class="col-2  col-xs-12 form-group">
                                 <label for="">Cantidad</label>
-                                <input id="compra-cantidad" type="text" class="form-control solo-numeros">
+                                <input id="venta-cantidad" type="text" class="form-control solo-numeros">
                             </div>
                             <div class="col-2  col-xs-12 form-group">
                                 <label for="">Stock</label>
-                                <input id="compra-stock" readOnly type="text" class="form-control">
+                                <input id="venta-stock" readOnly type="text" class="form-control">
                             </div>
                             <div class="col-3  col-xs-12 form-group">
-                                <label for="">Precio Compra</label>
-                                <input id="compra-pCompra" type="text" class="form-control">
+                                <label for="">Precio Venta</label>
+                                <input id="venta-pventa" type="text" readonly class="form-control">
                             </div>
 
                             <div class="col-3  col-xs-12  form-group">
@@ -184,7 +191,7 @@
 
                                             <th>Producto</th>
                                             <th>Cantidad</th>
-                                            <th>P. Compra</th>
+                                            <th>P. Venta</th>
                                             <th>Total</th>
                                             <th>Eliminar</th>
                                             <th style="display:none">Id</th>
@@ -215,7 +222,7 @@
                             <div class="col-6 col-md-3">
                                 <div class="small-box bg-info">
                                     <div class="inner">
-                                        <h3 id="compra-subtotal">0</h3>
+                                        <h3 id="venta-subtotal">0</h3>
 
                                         <p class="text-white"><strong>(+) </strong>Subtotal</p>
                                     </div>
@@ -227,7 +234,7 @@
                             <div class="col-6 col-md-3">
                                 <div class="small-box bg-info">
                                     <div class="inner">
-                                        <h3 id="compra-iva">0</h3>
+                                        <h3 id="venta-iva">0</h3>
 
                                         <p class="text-white"><strong>(+) </strong>IVA 12%</p>
                                     </div>
@@ -239,7 +246,7 @@
                             <div class="col-6 col-md-3">
                                 <div class="small-box bg-info">
                                     <div class="inner">
-                                        <h3 id="compra-descuento">0</h3>
+                                        <h3 id="venta-descuento">0</h3>
 
                                         <p class="text-white"><strong>(-) </strong>Descuento</p>
                                     </div>
@@ -251,7 +258,7 @@
                             <div class="col-6 col-md-3">
                                 <div class="small-box bg-info">
                                     <div class="inner">
-                                        <h3 id="compra-totalg">0</h3>
+                                        <h3 id="venta-totalg">0</h3>
 
                                         <p class="text-white">Total</p>
                                     </div>
@@ -264,7 +271,7 @@
 
                         <div class="row text-right ">
                             <div class="col-12">
-                                <button id="guardar-compra" type="button" class="btn  btn-primary ">Guardar</button>
+                                <button id="guardar-venta" type="button" class="btn  btn-primary ">Guardar</button>
                             </div>
 
                         </div>
@@ -282,12 +289,12 @@
     </div>
     <!-- /.content -->
 
-    <!-- MODAL DE LISTAR PROVEEDORES -->
-    <div class="modal fade" id="modal-cargar-proveedores">
+    <!-- MODAL DE LISTAR CLIENTE -->
+    <div class="modal fade" id="modal-cargar-cliente">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
-                    <h4 class="modal-title">Proveedores</h4>
+                    <h4 class="modal-title">Clientes</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -296,28 +303,29 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="">Buscar Proveedores</label>
-                                <input id="buscar-proveedores" type="text" class="form-control"
-                                    placeholder="Ingrese el nombre del proveedor">
+                                <label for="">Buscar Clientes</label>
+                                <input id="buscar-clientes" type="text" class="form-control"
+                                    placeholder="Ingrese el nombre del Cliente">
                             </div>
                         </div>
                     </div>
                     <div class="row" style="height: 200px !important; overflow: auto;">
                         <div class="col-12">
-                            <div class="tabla-buscar-proveedor">
+                            <div class="tabla-buscar-cliente">
                                 <table class="table table-hover text-nowrap">
                                     <thead>
                                         <tr>
                                             <th>#</th>
                                             <th style="display: none">ID</th>
-                                            <th>Ruc</th>
-                                            <th>Razon Social</th>
+                                            <th>Cedula</th>
+                                            <th>Nombres</th>
+                                            <th>Apellidos</th>
                                             <th>Telefono</th>
                                             <th>Direccion</th>
                                             <th>OK</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="proveedor-body">
+                                    <tbody id="cliente-body">
 
                                     </tbody>
                                 </table>
@@ -371,6 +379,7 @@
                                             <th>Nombre</th>
                                             <th>Categoria</th>
                                             <th>Stock</th>
+                                            <th>Precio Venta</th>
                                             <th>OK</th>
                                         </tr>
                                     </thead>
@@ -403,4 +412,4 @@
 
 
     <script src="<?=BASE?>views/plugins/Toast/js/Toast.min.js"></script>
-    <script src="<?=BASE?>views/dist/js/scripts/nuevaCompra.js"></script>
+    <script src="<?=BASE?>views/dist/js/scripts/nuevaVenta.js"></script>

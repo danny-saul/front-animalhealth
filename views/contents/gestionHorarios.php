@@ -48,13 +48,18 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 form-group">
+                                <div class="col-12 col-md-6">
                                     <div class="form-group">
                                         <label for="">Fecha</label>
-                                        <input id="fecha-doctor" type="date" class="form-control">
+                                        <input id="fecha-doctor" type="date" name="fecha" class="form-control">
                                     </div>
                                 </div>
-
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Intervalo</label>
+                                        <input id="hora-intervalo" type="text" name="intervalo" class="form-control">
+                                    </div>
+                                </div>
                             </div>
                             <div class="row col-6">
                                 <button type="submit" class="btn btn-block bg-gradient-primary btn-md">Guardar</button>
@@ -286,6 +291,7 @@
                                 <label for="">Fecha</label>
                                 <input id="e-h-fecha" type="date" name="efecha" class="form-control">
                             </div>
+
                         </div>
                     </form>
                     <div class="row">
@@ -312,7 +318,8 @@
 <script src="<?=BASE?>views/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
 <script src="<?=BASE?>views/plugins/jszip/jszip.min.js"></script>
 <script src="<?=BASE?>views/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="<?=BASE?>views/plugins/moment/moment.min.js"></script>
 
 
 <script src="<?=BASE?>views/plugins/Toast/js/Toast.min.js"></script>
-<script src="<?=BASE?>views/dist/js/scripts/gestionhorario.js?ver=1.1.1.5"></script>
+<script src="<?=BASE?>views/dist/js/scripts/gestionhorario.js?ver=1.1.1.1"></script>

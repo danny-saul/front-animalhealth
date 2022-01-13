@@ -9,7 +9,7 @@
         guardarReceta();
     }
 
-    function citasPendientes(){
+  /*   function citasPendientes(){
         let usuario=JSON.parse(sessionStorage.getItem('sesion'));
         let persona_id= usuario.persona.id;
  
@@ -46,6 +46,65 @@
                                 <button class="btn btn-sm btn-success" disabled="disabled" id="btn-disabled" onclick="cambiar_estado(${element.cita.id},2)">
                                     <i class="far fa-check-square"></i>
                                 </button>
+                            </div>
+                            </div>
+                        </div>
+                        </div>`  
+                    });
+                }
+                $('#citas-pendientes').html(div);
+            },
+            error: function (jqXHR, status, error) {
+                console.log('Disculpe, existió un problema');
+            },
+            complete: function (jqXHR, status) {
+                // console.log('Petición realizada');
+            }
+        });
+
+    } */
+
+
+    function citasPendientes(){
+        let usuario=JSON.parse(sessionStorage.getItem('sesion'));
+        let persona_id= usuario.persona.id;
+ 
+        $.ajax({
+            url: urlServidor + 'citas/pendientes/'+persona_id+'/'+1,
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+              //  console.log(response);
+
+                let div='';
+                if(response.length > 0 ){
+                    response.forEach(element => {
+                        div += `<div class="col-md-4 col-sm-6 col-12">
+                        <div class="info-box bg-gradient-warning">
+                            <span class="info-box-icon"><i class="far fa-calendar-alt"></i></span>
+                        
+                            <div class="info-box-content">
+                                <span class="info-box-text">Cedula: <span>${element.cita.cliente.persona.cedula} </span> </span>
+                                <span class="info-box-text">Cliente: <span>${element.cita.cliente.persona.nombre} ${element.cita.cliente.persona.apellido} </span> </span>
+                                <span class="info-box-text">Mascota: <span>${element.cita.mascota.nombre}</span> </span>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 100%"></div>
+                                </div>
+                                <span class="progress-description">
+                                    Hora:  <span>${element.cita.horarios_atencion.horario} </span>
+                                </span>
+                                <div class="text-center">
+                                <button class="btn btn-sm btn-primary"
+                                data-toggle="modal" data-target="#modal-cargar-citas" data-backdrop="static" data-keyboard="false"
+                                         onclick="ver_cita(${element.cita.id})">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-success" disabled="disabled" id="btn-disabled" onclick="cambiar_estado(${element.cita.id},2)">
+                                    <i class="far fa-check-square"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger" id="btn-cancelar" onclick="cancelar_cita(${element.cita.id},3)">
+                                <i class="fas fa-times"></i>
+                            </button>
                             </div>
                             </div>
                         </div>
@@ -247,6 +306,7 @@
                     toastr["success"](response.mensaje, "Receta")
                     resetDatos();
                     $('#btn-disabled').prop('disabled',false);
+                    $('#modal-cargar-citas').modal('hide');
 
     
                 } else{
@@ -387,7 +447,35 @@
                         "preventDuplicates": true,
                         "positionClass": "toast-top-center",
                     };
-                    toastr["success"](response.mensaje, "Citas")
+                    toastr["success"]('La Cita a sido atendida', "Citas")
+                    citasPendientes();
+                }
+            },
+            error : function(jqXHR, status, error) {
+                console.log('Disculpe, existió un problema');
+            },
+            complete : function(jqXHR, status) {
+                // console.log('Petición realizada');
+            }
+        });
+    }
+
+    function cancelar_cita(id_cita,estado_id){
+        $.ajax({
+            // la URL para la petición
+            url : urlServidor + 'citas/cancelar/' + id_cita + '/' + estado_id,
+            // especifica si será una petición POST o GET
+            type : 'GET',
+            // el tipo de información que se espera de respuesta
+            dataType : 'json',
+            success : function(response) { 
+                if(response.status){
+                    toastr.options = {
+                        "closeButton": true,
+                        "preventDuplicates": true,
+                        "positionClass": "toast-top-center",
+                    };
+                    toastr["success"]('La cita ha sido cancelada', "Citas")
                     citasPendientes();
                 }
             },

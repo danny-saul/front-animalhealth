@@ -7,5 +7,10 @@ class ComprasController{
      
     }
 
+    public function consultas(){
+        include_once 'views/contents/vercompras.php';
+     
+    }
+
 
 }

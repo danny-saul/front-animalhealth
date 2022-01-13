@@ -15,6 +15,10 @@ class CitasController{
         include_once 'views/contents/citasAtendidas.php';
      
     }
+    public function canceladas(){
+        include_once 'views/contents/citasCanceladas.php';
+     
+    }
 
 
 }

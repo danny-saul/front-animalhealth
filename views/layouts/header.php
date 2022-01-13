@@ -20,6 +20,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link  type="text/html" href="<?=BASE?>views/dist/css/style.css?ver=1.1.1">
   <link  type="text/html" href="<?=BASE?>views/dist/css/style.css?ver=1.1.1">
   <link  rel="stylesheet" href="<?=BASE?>views/dist/css/estilos.css?ver=1.1.1">
+  <link  rel="stylesheet" href="<?=BASE?>views/dist/css/factura.css?ver=1.1.1">
   <!-- login -->
 <!--===============================================================================================-->	
 <link rel="icon" type="image/png" href="<?=BASE?>views/dist/css/logincss/images/logo22.gif"/> 

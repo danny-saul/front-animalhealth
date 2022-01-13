@@ -16,12 +16,12 @@
 </div>
 <!-- /.content-header -->
 
- <!-- Main content -->
- <div class="content">
-      <div class="container-fluid">
-      <button class="btn btn-secondary btn-lg" data-toggle="modal" data-target="#modal-registro-cliente"
+<!-- Main content -->
+<div class="content">
+    <div class="container-fluid">
+        <button class="btn btn-secondary btn-lg" data-toggle="modal" data-target="#modal-registro-cliente"
             data-backdrop="static" data-keyboard="false"><i class="fa fa-plus mr-2"></i>Agregar Cliente</button>
-            <div class="row mt-3">
+        <div class="row mt-3">
             <div class="col-12">
                 <div class="card card-dark">
                     <div class="card-header">
@@ -60,14 +60,14 @@
             </div>
         </div>
         <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
 
 
-  <!-- Modales -->
+<!-- Modales -->
 <div class="modal fade" id="modal-registro-cliente">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -89,8 +89,8 @@
                             </div>
                             <div class="col-12 col-md-4 form-group">
                                 <label for="">Nombre</label>
-                                <input id="new-cli-nombre" type="text" name="nombre" class="form-control" maxlength="200"
-                                    minlength="3">
+                                <input id="new-cli-nombre" type="text" name="nombre" class="form-control"
+                                    maxlength="200" minlength="3">
                             </div>
                             <div class="col-12 col-md-4 form-group">
                                 <label for="">Apellido</label>
@@ -101,8 +101,8 @@
                         <div class="row">
                             <div class="col-12 col-md-4 form-group">
                                 <label for="">Telefono</label>
-                                <input id="new-cli-telefono" type="text" name="telefono" class="form-control" maxlength="10"
-                                    minlength="10">
+                                <input id="new-cli-telefono" type="text" name="telefono" class="form-control"
+                                    maxlength="10" minlength="10">
                             </div>
                             <div class="col-12 col-md-4 form-group">
                                 <label for="">Direccion</label>
@@ -151,8 +151,8 @@
                                 <input type="hidden" id="e-cli-id">
                                 <input type="hidden" id="e-cli-persona-id">
                                 <label for="">Cédula</label>
-                                <input id="e-cli-cedula" readOnly type="text" name="cedula" class="form-control" required
-                                    maxlength="10" minlength="10">
+                                <input id="e-cli-cedula" readOnly type="text" name="cedula" class="form-control"
+                                    required maxlength="10" minlength="10">
                             </div>
                             <div class="col-12 col-md-4 form-group">
                                 <label for="">Nombre</label>
@@ -161,15 +161,15 @@
                             </div>
                             <div class="col-12 col-md-4 form-group">
                                 <label for="">Apellido</label>
-                                <input id="e-cli-apellido" type="text" name="apellido" class="form-control" maxlength="200"
-                                    minlength="3">
+                                <input id="e-cli-apellido" type="text" name="apellido" class="form-control"
+                                    maxlength="200" minlength="3">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 col-md-4 form-group">
                                 <label for="">Telefono</label>
-                                <input id="e-cli-telefono" type="text" name="telefono" class="form-control" maxlength="10"
-                                    minlength="10">
+                                <input id="e-cli-telefono" type="text" name="telefono" class="form-control"
+                                    maxlength="10" minlength="10">
                             </div>
                             <div class="col-12 col-md-4 form-group">
                                 <label for="">Direccion</label>
@@ -181,14 +181,14 @@
                                 </select>
                             </div>
                         </div>
-                        
+
                     </form>
                     <div class="row">
-                            <div class="col-12 form-group text-right" >
-                                <button class="btn btn-primary" id="btn-cli-update"  type="button">
-                                    <i class="fas fa-save mr-2"></i>Guardar</button>
-                            </div>
+                        <div class="col-12 form-group text-right">
+                            <button class="btn btn-primary" id="btn-cli-update" type="button">
+                                <i class="fas fa-save mr-2"></i>Guardar</button>
                         </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer justify-content-between">

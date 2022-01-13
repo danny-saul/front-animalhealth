@@ -47,7 +47,6 @@
                                         <th>Servicio</th>
                                         <th>Hora</th>
                                         <th>Estado Cita</th>
-                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -165,17 +164,53 @@
                             </div>
                         </div>
 
+                        <!--                         <strong type="button" class="text-primary">Ver horario de atencion del doctor</strong>
+ -->
+                        <!-- 
+                        <div class="card-body">
+                            <table  class="d-none table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10px">#</th>
+                                        <th>Horario de Atencion</th>
+                                        <th>Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1.</td>
+                                        <td>07:00:00 - 08:00:00</td> 
+                                        <th>2022-01-08</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div> -->
+
                         <div class="row">
+                            <div class="col-12" id="fecha-doctor">
+                                <!-- <span class="ml-3"> Fecha: <b id="fecha-intervalo"> </b></span> -->
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6 form-group d-none" id="hora-cita-a">
+                                <label for="">Hora</label>
+                                <select id="new-hora-cita" class="form-control"></select>
+                            </div>
                             <div class="col-12 col-md-6 form-group">
                                 <label for="">Servicios</label>
                                 <select id="new-servicio" class="form-control"></select>
                             </div>
+                        </div>
+              
 
+                        <!-- <div class="row">
                             <div class="col-12 col-md-6 form-group">
                                 <label for="">Hora</label>
                                 <select id="new-hora" class="form-control"></select>
                             </div>
-                        </div>
+                        </div> -->
+
 
                         <div class="row">
                             <div class="col-12">
@@ -274,7 +309,7 @@
                                 <tbody id="doctor-body">
 
                                 </tbody>
-                               
+
                             </table>
                         </div>
                     </div>
@@ -298,4 +333,4 @@
 <script src="<?=BASE?>views/plugins/pdfmake/pdfmake.min.js"></script>
 
 <script src="<?=BASE?>views/plugins/Toast/js/Toast.min.js"></script>
-<script src="<?=BASE?>views/dist/js/scripts/agendarCitas.js"></script>
+<script src="<?=BASE?>views/dist/js/scripts/agendarCitas.js?ver=1.1.1.3"></script>
