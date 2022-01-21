@@ -1,5 +1,4 @@
 
-
 /* 
 $(function () { */
 
@@ -8,15 +7,17 @@ $(function () { */
     function _init() {
         cargarDoctor();
         guardarHorarioAtencion();
-        cargarHorariosLibres('S'); 
+        cargarHorariosAsignacion('N'); 
         agregarDoctorHorario();
         get_HorariosAtencion(); 
-        cargarTabla(); 
+        //cargarTabla(); 
         editandohorasDoctorModal();
         //cargar_hora();
     }
 
-    function cargarTabla(){
+    
+
+    /* function cargarTabla(){
         tabla = $('#tabla-listar-horasD').DataTable({
             "lengthMenu": [ 5, 10, 25, 75, 100],//mostramos el menú de registros a revisar
             "responsive": true, "lengthChange": false, "autoWidth": false,
@@ -81,7 +82,7 @@ $(function () { */
 
 			   }//cerrando language
         });
-    }
+    } */
 
     function cargarDoctor(){
         let sesion = JSON.parse(sessionStorage.getItem('sesion')); 
@@ -91,6 +92,8 @@ $(function () { */
 
         $('#local-doctor').val(nombreDoctor);
         $('#doctor-id').val(doctor_id);
+
+        get_HorariosAtencion(doctor_id);
     }
     
     function guardarHorarioAtencion(){
@@ -141,46 +144,6 @@ $(function () { */
         });
     }
 
-    //ejemplo
-   
-    
-
-    /* function calcularIntervalo(hora_ini,hora_fin,intervalo){
-
-        for (let index = 0; index < array.length; index++) {
-            const element = array[index];
-            
-        }
-
-    }  */   
-
-    /* function cargar_hora(){
-        let hoy = moment().get('year')+'-'+(moment().get('month')+1)+'-'+moment().get('date') + ' ' + '7:00:00';
-        update_fecha_inicio();
-
-        function update_fecha_inicio(){
-            $('#fecha-doctor').blur(function(){
-                let fecha = $('#fecha-doctor').val();
-             console.log(fecha);
-            });
-        }
-        update_hora_inicio();
-        function update_hora_inicio(){
-            $('#hora-entrada').blur(function(){
-                let horaE = $('#hora-entrada').val();
-                console.log(horaE);
-            });
-        }
-        update_fecha_fin();
-        function update_fecha_fin(){
-            $('#hora-salida').blur(function(){
-                let horaS = $('#hora-salida').val();
-                console.log(horaS);
-            });
-        }
-     
-    } */
-
     function guardandoHorarioAtencion(json){
         $.ajax({
             url:urlServidor  +'horarios_atencion/guardar',
@@ -197,7 +160,7 @@ $(function () { */
                     };
                     toastr["success"](response.mensaje, "Horario de Atencion")
                     $('#form-horario-doctor')[0].reset();
-                    cargarHorariosLibres2('S');
+                    cargarHorariosAsignacion('N');
     
                 } else{
                     toastr.options = {
@@ -217,7 +180,7 @@ $(function () { */
         });
     }
 
-    function cargarHorariosLibres(estado){
+    function cargarHorariosAsignacion(estado){
         $.ajax({
             // la URL para la petición
             url : urlServidor + 'horarios_atencion/libre/'+estado, 
@@ -230,12 +193,10 @@ $(function () { */
                     let option = '<option value=0>Seleccione una Hora de Atencion</option>';
                     
                     response.horario_atencion.forEach(element =>{
-                        option += `<option value=${element.id}>${element.horaE} - ${element.horaS} / ${element.fecha}</option>`;
+                        option += `<option value=${element.id}>${element.horario} -  ${element.fecha}</option>`;
                     });
 
                     $('#select-horario-atencion').html(option);
-
-   
                 }else{
                     toastr.options = {
                         "closeButton": true,
@@ -295,7 +256,7 @@ $(function () { */
                         };
                         toastr["success"](response.mensaje, "Horario de Atencion");
                         get_HorariosAtencion(doctor_id);
-                        cargarHorariosLibres2('S');
+                        cargarHorariosAsignacion('N');
                     }else{
                         toastr.options = {
                             "closeButton": true,
@@ -314,11 +275,7 @@ $(function () { */
             });
         }
 
-        })
-        
-
-
-
+        });
     }
 
     function get_HorariosAtencion(id_doctor){
@@ -330,19 +287,18 @@ $(function () { */
             // el tipo de información que se espera de respuesta
             dataType : 'json',
             success : function(response) {
-             //   console.log(response);
+             //console.log(response);
                 if(response.status){
                     let tr = '';
                     let i = 1;
                     response.doctor_horario.forEach(element => {
                         tr += ` <tr>
                         <td>${i}</td>
-                        <td>${element.horarios_atencion.horaE}</td>
-                        <td>${element.horarios_atencion.horaS}</td>
-                        <td><span class="tag tag-warning">${element.horarios_atencion.fecha}</span></td>
+                        <td>${element.horario}</td>
+                        <td><span class="tag tag-warning">${element.fecha}</span></td>
                         <td>
                             <div>
-                                <button class="btn btn-danger" onclick="eliminar_doctor_horario(${element.doctor_id},${element.horarios_atencion.id})">
+                                <button class="btn btn-danger" onclick="eliminar_doctor_horario(${element.doctor_id},${element.id})">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
@@ -369,124 +325,11 @@ $(function () { */
             }
         });
     }
-
-
-    /* function cargarDoctores(){
-        $.ajax({
-            // la URL para la petición
-            url : urlServidor + 'doctor/listarArray',
-            // especifica si será una petición POST o GET
-            type : 'GET',
-            // el tipo de información que se espera de respuesta
-            dataType : 'json',
-            success : function(response) {
-                
-                    let item = '';
-                    let i = 0;
-                    response.forEach(element => {
-                        item += `<blockquote id="doctor-${i}" onclick="seleccionar(${element.doctor.id},${i},${response.length})" class="quote-secondary doctores" style="margin-left: -5px">
-                        <p style="margin-bottom: -5px">${element.doctor.persona.nombre} ${element.doctor.persona.apellido}</p>
-                        <small>${element.doctor.persona.cedula}</small>
-                      </blockquote>`;
-                      i++;
-                    });
     
-                $('#box-doctores').html(item);           
-            },
-            error : function(jqXHR, status, error) {
-                console.log('Disculpe, existió un problema');
-            },
-            complete : function(jqXHR, status) {
-                // console.log('Petición realizada');
-            }
-        });
-    } */
 
 /* }); */
 
-function cargarHorariosLibres2(estado){
-    $.ajax({
-        // la URL para la petición
-        url : urlServidor + 'horarios_atencion/libre/'+estado, 
-        // especifica si será una petición POST o GET
-        type : 'GET',
-        // el tipo de información que se espera de respuesta
-        dataType : 'json',
-        success : function(response) {
-            if(response.status){
-                let option = '<option value=0>Seleccione una Hora de Atencion</option>';
-                
-                response.horario_atencion.forEach(element =>{
-                    option += `<option value=${element.id}>${element.horaE} - ${element.horaS} / ${element.fecha}</option>`;
-                });
-                $('#select-horario-atencion').html(option);
 
-            }else{
-                toastr.options = {
-                    "closeButton": true,
-                    "preventDuplicates": true,
-                    "positionClass": "toast-top-center",
-                };
-                toastr["error"]("No hay  Horarios Libres", "Horarios Atencion")
-            }
-        },
-        error : function(jqXHR, status, error) {
-            console.log('Disculpe, existió un problema');
-        },
-        complete : function(jqXHR, status) {
-            // console.log('Petición realizada');
-        }
-    });
-}
-
-function get_HorariosAtencion2(id_doctor){
-    $.ajax({
-        // la URL para la petición
-        url : urlServidor + 'horarios_atencion/doctor/' + id_doctor,
-        // especifica si será una petición POST o GET
-        type : 'GET',
-        // el tipo de información que se espera de respuesta
-        dataType : 'json',
-        success : function(response) {
-            console.log(response);
-            if(response.status){
-                let tr = '';
-                let i = 1;
-                response.doctor_horario.forEach(element => {
-                    tr += ` <tr>
-                    <td>${i}</td>
-                    <td>${element.horarios_atencion.horaE}</td>
-                    <td>${element.horarios_atencion.horaS}</td>
-                    <td><span class="tag tag-warning">${element.horarios_atencion.fecha}</span></td>
-                    <td>
-                        <div>
-                            <button class="btn btn-danger" onclick="eliminar_doctor_horario(${element.doctor_id},${element.horarios_atencion.id})">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </td>
-                    </tr>`;
-                });
-                $('#body-listado-doctor-hora').html(tr);
-            }else{
-                let tr = `<tr>
-                <td></td>     
-                <td></td>
-                <td></td>
-                <td>${response.mensaje}</td>    
-                <td></td>           
-              </tr>`;
-              $('#body-listado-doctor-hora').html(tr);
-            }
-        },
-        error : function(jqXHR, status, error) {
-            console.log('Disculpe, existió un problema');
-        },
-        complete : function(jqXHR, status) {
-            // console.log('Petición realizada');
-        }
-    });
-}
 
 function eliminar_doctor_horario(id_doctor,id_horarios_atencion){
     $.ajax({
@@ -497,8 +340,8 @@ function eliminar_doctor_horario(id_doctor,id_horarios_atencion){
         // el tipo de información que se espera de respuesta
         dataType : 'json',
         success : function(response) {
-            get_HorariosAtencion2(id_doctor);
-            cargarHorariosLibres2('S');
+            get_HorariosAtencion(id_doctor);
+            cargarHorariosAsignacion('N');
             toastr.options = {
                 "closeButton": true,
                 "preventDuplicates": true,
@@ -537,8 +380,7 @@ function eliminar_horaAdoctor(id){
                     "positionClass": "toast-top-center",
                 };
     
-                toastr["success"](response.mensaje, "hora atencion")
-            
+                toastr["success"](response.mensaje, "hora atencion")           
                 cargarTabla();
             }
         },
@@ -567,8 +409,6 @@ function cargarHorasDoctor(id){
                 $('#e-hora-entrada').val(response.horarios_atencion.horaE);
                 $('#e-hora-salida').val(response.horarios_atencion.horaS);
                 $('#e-h-fecha').val(response.horarios_atencion.fecha);
-         
-
             } 
         },
         error : function(jqXHR, status, error) {
@@ -583,12 +423,10 @@ function editandohorasDoctorModal(){
     $('#btn-update-hora-doctor').click(function(){
 
         let id = $('#e-horaD-id').val();
-      
         let horaE = $('#e-hora-entrada').val();
         let horaS = $('#e-hora-salida').val();
         let fecha = $('#e-h-fecha').val();
-
-                
+           
         let json = {
             horarios_atencion: {
                 id:id,
@@ -597,8 +435,6 @@ function editandohorasDoctorModal(){
                 fecha:fecha,   
             }
         };
-
-        console.log(json);
 
         $.ajax({
             // la URL para la petición
@@ -639,21 +475,4 @@ function editandohorasDoctorModal(){
     });
 }
 
-
-
-/* function seleccionar(id,select,cantidad){
-
-    
-    let item = '#doctor-'+select;
-    $(item).addClass('select-doctor');
-
-    for(let i=0;i<cantidad;i++){
-        let aux = '#doctor-'+i;
-        if(i!=select){
-            $(aux).removeClass('select-doctor');
-            
-        }
-    }
-
-} */
 

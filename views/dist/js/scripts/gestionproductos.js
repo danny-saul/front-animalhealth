@@ -180,7 +180,6 @@
             let descripcion= $('#new-producto-descripcion').val();
             let imagen= $('#new-producto-img')[0].files[0]; 
             let stock= $('#new-producto-stock').val();
-            let precio_venta= $('#new-producto-Pventa').val();   
             let fecha = $('#new-producto-fecha').val();
             let def = (imagen == undefined) ? 'productodefault.jpg' : imagen.name;
 
@@ -191,7 +190,6 @@
                     nombre,
                     descripcion,
                     imagen:def,
-                    precio_venta,
                     fecha,
                     
                 },

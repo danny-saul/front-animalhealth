@@ -34,8 +34,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!--===============================================================================================-->
 
 
-
-
+  <!--Chart Js -->
+  <link rel="stylesheet" href="<?=BASE?>views/plugins/chart.js/Chart.min.css">
 
 
   <!-- dataTables -->

@@ -111,6 +111,7 @@ $(function () {
                     </tr>`;
                     });
                     $('#body_detalle_venta').html(tr);
+                    console.log(response.detalle_venta);
                 } 
             },
             error : function(jqXHR, status, error) {

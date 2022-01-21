@@ -45,13 +45,16 @@ $(function(){
                  console.log(response);
                 
                if(response.status){
-                   //console.log(response.status);
+                   console.log(response.status);
                     let sesion = response.usuario;
                     let doctor_id = response.doctor;
+                    let cliente_id = response.cliente;
 
-                   
+     
                     sessionStorage.setItem('sesion', JSON.stringify(sesion));
                     sessionStorage.setItem('sesion-2', JSON.stringify(doctor_id));
+                    sessionStorage.setItem('sesion-3', JSON.stringify(cliente_id));
+
 
                     redirigir(sesion.roles.id);
 

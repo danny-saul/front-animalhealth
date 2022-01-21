@@ -12,6 +12,7 @@
         calcular_descuento();
         reset_productos();
         reset_datos();
+        cargarIva();
     }
 
     function cargarProducto() {
@@ -270,6 +271,30 @@
     
     }
 
+    function cargarIva(){
+        $.ajax({
+            url:urlServidor  +'configuracion/listar/'+1,
+            type:'GET',
+            dataType:'json',
+            success:function(response){
+            //    console.log(response);
+                if(response.status){
+    
+                   $('#numero-porcentaje').text(response.configuracion.iva);
+               
+                  
+                } 
+            },
+            error : function(jqXHR, status, error) {
+                console.log('Disculpe, existió un problema');
+            },
+            complete : function(jqXHR, status) {
+                // console.log('Petición realizada');
+            }
+        });
+
+    }
+
 //});
 
 
@@ -323,37 +348,63 @@ function borrar_item(id){
 }
 
 function actualizar_total(){
-    let tr = $('#body-aggProducto tr');
-    let descuento_input = parseFloat($('#compra-descuento-input').val());
-    let subtotal = 0;
-    let descuento =0;
-    let total = 0;
+
+    $.ajax({
+        url:urlServidor  +'configuracion/listar/'+1,
+        type:'GET',
+        dataType:'json',
+        success:function(response){
+        //    console.log(response);
+            if(response.status){
+                let tr = $('#body-aggProducto tr');
+                let descuento_input = parseFloat($('#compra-descuento-input').val());
+                let subtotal = 0;
+                let descuento =0;
+                let total = 0;
+              
+                for(let i=0; i < tr.length; i++){
+                    let hijos = tr[i].children;
+                    subtotal += parseFloat(hijos[3].innerText);       
+                }
+                let iva = Number(subtotal.toFixed(2)) * (response.configuracion.iva)/100;
+                descuento = descuento_input;
+             
+                if(descuento > 0){
+                    total = subtotal - descuento + iva;
+                }else{
+                    total = Number(subtotal) + Number(iva.toFixed(2));
+                }
+            
+                $('#compra-subtotal').text(subtotal.toFixed(2));
+                $('#compra-iva').text(iva.toFixed(2));
+                $('#compra-descuento').text(descuento.toFixed(2));
+                $('#compra-totalg').text(total.toFixed(2));
+
+               
+              
+            } 
+        },
+        error : function(jqXHR, status, error) {
+            console.log('Disculpe, existió un problema');
+        },
+        complete : function(jqXHR, status) {
+            // console.log('Petición realizada');
+        }
+    });
+
   
-    for(let i=0; i < tr.length; i++){
-        let hijos = tr[i].children;
-        subtotal += parseFloat(hijos[3].innerText);       
-    }
-    let iva = Number(subtotal.toFixed(2)) * 0.12;
-    descuento = descuento_input;
- 
-    if(descuento > 0){
-        total = subtotal - descuento + iva;
-    }else{
-        total = Number(subtotal) + Number(iva.toFixed(2));
-    }
-
- /*    $('#total-general').val(total); //guardar en la bd
-
-    $('#total-detalle').text(total.toFixed(2));  //mostra en la tabla */
-
-    $('#compra-subtotal').text(subtotal.toFixed(2));
-    $('#compra-iva').text(iva.toFixed(2));
-    $('#compra-descuento').text(descuento.toFixed(2));
-    $('#compra-totalg').text(total.toFixed(2));
 }
 
 
 function calcular_descuento(){
+    $.ajax({
+        url:urlServidor  +'configuracion/listar/'+1,
+        type:'GET',
+        dataType:'json',
+        success:function(response){
+        //    console.log(response);
+            if(response.status){
+                
     $('#compra-descuento-input').blur(function(e){
         let descuento_input = $('#compra-descuento-input').val();
         let subtotal = $('#compra-subtotal').text();
@@ -369,7 +420,7 @@ function calcular_descuento(){
               )
               $('#compra-descuento-input').val('0');
         }else{
-            let iva = Number(parseFloat(subtotal).toFixed(2)) * 0.12;
+            let iva = Number(parseFloat(subtotal).toFixed(2)) * (response.configuracion.iva)/100;
             descuento = descuento_input;
 
             if(descuento > 0){
@@ -387,6 +438,20 @@ function calcular_descuento(){
 
 
     });
+        
+
+              
+            } 
+        },
+        error : function(jqXHR, status, error) {
+            console.log('Disculpe, existió un problema');
+        },
+        complete : function(jqXHR, status) {
+            // console.log('Petición realizada');
+        }
+    });
+
+
 
     
 }

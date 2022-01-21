@@ -1,6 +1,8 @@
 $(function () {
-
+   
+  
     _init();
+ 
 
     function _init() {
         cargarServicios();
@@ -8,19 +10,11 @@ $(function () {
         cargarMascotaCliente();
         guardarCita();
         cargarTabla();
-      
+        cargardatahorario();
+    //    validarDias();
    
-
-        /*cargarRaza();
-        cargarCliente();
-        visualizarMascota();
-        visualizarTipoMascota();
-        guardarMascota();
-        reseteandodatos();
-        fecha();
-        cargarTabla(); */
     }
-
+   
     function cargarServicios() {
         $.ajax({
             url: urlServidor + 'servicios/listar',
@@ -57,7 +51,7 @@ $(function () {
                 type: 'GET',
                 dataType: 'json',
                 success: function (response) {
-                    //    console.log(response);
+                        //console.log(response);
                     if (response.status) {
                         let tr = '';
                         let i = 1;
@@ -90,7 +84,7 @@ $(function () {
             });
         })
     }
-   
+
 
     function cargarMascotaCliente() {
         $('#buscar-mascota').click(function (e) {
@@ -138,30 +132,6 @@ $(function () {
         })
     }
 
-  /*   function guardarCita() {
-        $('#nueva-cita').submit(function (e) {
-            e.preventDefault();
-            let doctor_id = $('#doctor-id').val();
-            let servicios_id = $('#new-servicio option:selected').val();
-            let mascota_id = $('#mascota-id').val();
-            let cliente_id = $('#cliente-id').val();
-            let horarios_citas_id = $('#new-hora option:selected').val();
-
-            let json = {
-                cita: {
-                    doctor_id,
-                    servicios_id,
-                    mascota_id,
-                    cliente_id,
-                    horarios_citas_id
-                },
-            };
-            //console.log(json);
-
-            guardandocita(json);
-
-        });
-    } */
 
     function guardarCita() {
         $('#nueva-cita').submit(function (e) {
@@ -181,54 +151,12 @@ $(function () {
                     horarios_atencion_id
                 },
             };
-           // console.log(json);
+            //   console.log(json);
 
             guardandocita(json);
 
         });
     }
-
-  /*   function guardandocita(json) {
-        $.ajax({
-            url: urlServidor + 'citas/guardar',
-            type: 'POST',
-            data: 'data=' + JSON.stringify(json),
-            dataType: 'json',
-            success: function (response) {
-                //    console.log(response);
-                if (response.status) {
-                    toastr.options = {
-                        "closeButton": true,
-                        "preventDuplicates": true,
-                        "positionClass": "toast-top-center",
-                    };
-
-                    toastr["success"](response.mensaje, "Citas")
-                    cargarTabla();
-                    $('#nueva-cita')[0].reset();
-                    cargarHorasCitas();
-                    //reseteandodatos();
-
-                } else {
-                    toastr.options = {
-                        "closeButton": true,
-                        "preventDuplicates": true,
-                        "positionClass": "toast-top-center",
-                    };
-
-                    toastr["error"](response.mensaje, "Citas")
-
-                }
-            },
-            error: function (jqXHR, status, error) {
-                console.log('Disculpe, existió un problema');
-            },
-            complete: function (jqXHR, status) {
-                // console.log('Petición realizada');
-            }
-        });
-
-    } */
 
 
     function guardandocita(json) {
@@ -372,6 +300,10 @@ $(function () {
         });
     }
 
+    function cargardatahorario() {
+
+    }
+
 });
 
 
@@ -420,52 +352,76 @@ function seleccionar_doctor(id) {
     let nombres = f[2].innerText;
     let telefono = f[3].innerText;
 
-    $('#doctor-id').val(id);
+    let doctor_id = id;
+    console.log(doctor_id);
+
+    $('#doctor-id').val(id);//1 o 2
     $('#new-doctor-nombre').val(nombres);
     $('#new-doctor-telefono').val(telefono);
     $('#hora-cita-a').removeClass('d-none');
-    
-    $.ajax({
-        url: urlServidor + 'doctor_horario/listarDoctorHorario/' + id,
-        type: 'GET',
-        dataType: 'json',
-        success: function (response) {
-            console.log(response);
-            let div = ''; let i = 1; let option =''; let span ='';
- 
-            if (response.status) {
-               
-                span += ` 
-                <div class="form-group">  
-                    <span class="ml-3"> Fecha: <b>${response.horario[0].fecha}  </b></span>
-                </div>
-                `;
-              
-                    option = '<option value="0">Selecione hora</option>';
-                    response.disponibles.forEach(element => {
-                        option += `<option value=${element.id}>${element.horario}  </option>`;
-                    });
-                
-            } else {
+
+
+    $('#buscar-datos').click(function (e) {
+        e.preventDefault();
+        
+        let dias = $('#new-dias-d').val();
+        let d = dias.substring(8, 10); //2022-01-15 date
+        //let d = dias.substring(3, 5);  //01-15-2022 datepicker   
+        console.log(d);
+
+        $.ajax({
+            url: urlServidor + 'doctor_horario/listarDoctorHorario/' + doctor_id + '/' + d,
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                 console.log(response);
+                let option = ''; 
+
                 toastr.options = {
                     "closeButton": true,
                     "preventDuplicates": true,
                     "positionClass": "toast-top-center",
                 };
-                toastr["error"]('No hay horario', "Horarios")
-            }
-            $('#fecha-doctor').html(span);
-            //$('#id-intervalos-doctor').html(div);
-             $('#new-hora-cita').html(option);
 
-        },
-        error: function (jqXHR, status, error) {
-            console.log('Disculpe, existió un problema');
-        },
-        complete: function (jqXHR, status) {
-            // console.log('Petición realizada');
-        }
+                if (response.status) {
+                    
+                    let diasDisponibles = response.datos;
+                   
+                    if(diasDisponibles == null){
+                        toastr["error"]('No hay horas disponibles', "Horario Doctor"); 
+                                              
+                    }else{
+                        option = '<option value="0">Selecione hora</option>';
+                            diasDisponibles.forEach(element => {
+                             option += `<option value=${element.id}>${element.horario} </option>`;
+                        });
+                    
+                    toastr["success"]('Si hay horas disponibles', "Horario Doctor");
+                        
+                    }
+                    
+                } else {
+                    toastr["error"]('No hay datos', "Horario Doctor");
+                }
+                
+                $('#new-hora-cita').html(option);
+
+                $('#new-hora-cita').prop('selectedIndex',0);
+                //$('#new-hora-cita').val('');
+                
+                
+
+            },
+            error: function (jqXHR, status, error) {
+                console.log('Disculpe, existió un problema');
+            },
+            complete: function (jqXHR, status) {
+                // console.log('Petición realizada');
+            }
+        });
     });
+
+
 }
 
 

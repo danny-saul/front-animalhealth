@@ -81,7 +81,7 @@
                                     <label class="col-sm-4  col-form-label">Descuento :</label>
                                     <div class="col-sm-8">
                                         <input id="venta-descuento-input" type="text" value="0.00"
-                                            class="form-control form-control-sm">
+                                            class="form-control form-control-sm decimal">
                                     </div>
                                 </div>
 
@@ -91,7 +91,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="col-12 ">
-                                    <div class="card card-danger ">
+                                    <div class="card card-dark ">
                                         <div class="card-header ">
                                             <h3 class="card-title"> <span style="text-align: center">DATOS DE
                                                     VENTA</span></h3>
@@ -101,7 +101,7 @@
                                                 <div class="col-6   form-group">
                                                     <label>Fecha Venta :</label>
 
-                                                    <input id="c-v-fechac" type="date" name="fechav"
+                                                    <input id="c-v-fechac" type="date" required  min=<?php $hoy=date("Y-m-d"); echo $hoy;?> name="fechav"
                                                         class="form-control form-control-sm">
 
 
@@ -236,7 +236,7 @@
                                     <div class="inner">
                                         <h3 id="venta-iva">0</h3>
 
-                                        <p class="text-white"><strong>(+) </strong>IVA 12%</p>
+                                        <p class="text-white"><strong>(+) </strong>IVA <span id="numero-porcentaje"> </span>%</p>
                                     </div>
                                     <div class="icon">
                                         <i class="fas fa-dollar-sign"></i>

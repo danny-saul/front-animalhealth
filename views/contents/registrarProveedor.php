@@ -218,4 +218,4 @@
 <script src="<?=BASE?>views/plugins/pdfmake/pdfmake.min.js"></script>
 
 <script src="<?=BASE?>views/plugins/Toast/js/Toast.min.js"></script>
-<script src="<?=BASE?>views/dist/js/scripts/registrarProveedor.js"></script>
+<script src="<?=BASE?>views/dist/js/scripts/registrarProveedor.js?ver=1.1.1.1"></script>

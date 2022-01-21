@@ -51,7 +51,7 @@
                                 <div class="col-12 col-md-6">
                                     <div class="form-group">
                                         <label for="">Fecha</label>
-                                        <input id="fecha-doctor" type="date" name="fecha" class="form-control">
+                                        <input id="fecha-doctor" type="date" required min=<?php $hoy=date("Y-m-d"); echo $hoy;?> name="fecha" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
@@ -148,13 +148,12 @@
                                                     <h3 class="card-title">Horas Disponibles del Doctor</h3>
                                                 </div>
 
-                                                <div class="card-body table-responsive p-3">
+                                                <div class="card-body table-responsive p-3" style="height: 255px;overflow: auto;">
                                                     <table class="table table-hover text-nowrap">
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
-                                                                <th>Hora Entrada</th>
-                                                                <th>Hora Salida</th>
+                                                                <th>Horario</th>
                                                                 <th>Fecha</th>
                                                                 <th>Acción</th>
                                                             </tr>
@@ -226,7 +225,7 @@
 </div>
 
 <!-- MODAL LISTAR HORAS DEL DOCTOR -->
-<div class="col-12">
+<!-- <div class="col-12">
     <div class="card card-dark">
         <div class="card-header">
             <h3 class="card-title">Listar Horas Disponibles</h3>
@@ -235,9 +234,9 @@
                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                 </button>
             </div>
-            <!-- /.card-tools -->
+            
         </div>
-        <!--form-nuevo-descripcion /.card-header -->
+        
         <div class="card-body">
             <div class="div" style="overflow: auto;">
                 <table id="tabla-listar-horasD" class="table table-bordered table-striped">
@@ -255,9 +254,9 @@
                 </table>
             </div>
         </div>
-        <!-- /.card-body -->
+     
     </div>
-</div>
+</div> -->
 
 </div>
 
@@ -322,4 +321,4 @@
 
 
 <script src="<?=BASE?>views/plugins/Toast/js/Toast.min.js"></script>
-<script src="<?=BASE?>views/dist/js/scripts/gestionhorario.js?ver=1.1.1.1"></script>
+<script src="<?=BASE?>views/dist/js/scripts/gestionhorario.js?ver=1.1.1.2"></script>

@@ -152,6 +152,7 @@
                             </div>
                         </div>
 
+
                         <div class="row">
 
                             <div class="col-12 col-md-6 form-group">
@@ -164,28 +165,19 @@
                             </div>
                         </div>
 
-                        <!--                         <strong type="button" class="text-primary">Ver horario de atencion del doctor</strong>
- -->
-                        <!-- 
-                        <div class="card-body">
-                            <table  class="d-none table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 10px">#</th>
-                                        <th>Horario de Atencion</th>
-                                        <th>Fecha</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1.</td>
-                                        <td>07:00:00 - 08:00:00</td> 
-                                        <th>2022-01-08</th>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div> -->
+                        <div class="row">
+                            <div class="col-6 form group">
+                           <!--min=<php date("Y-m-d");?>   -->
+                                <label for="">Dias</label>
+                                <input id="new-dias-d" type="date" required min=<?php $hoy=date("Y-m-d"); echo $hoy;?> name ="fecha" class="form-control">
 
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-primary btn-sm " id="buscar-datos" style="margin-top: 35px;">
+                                    <i class=" fa fa-search  "></i> </button>
+
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-12" id="fecha-doctor">
                                 <!-- <span class="ml-3"> Fecha: <b id="fecha-intervalo"> </b></span> -->
@@ -202,16 +194,6 @@
                                 <select id="new-servicio" class="form-control"></select>
                             </div>
                         </div>
-              
-
-                        <!-- <div class="row">
-                            <div class="col-12 col-md-6 form-group">
-                                <label for="">Hora</label>
-                                <select id="new-hora" class="form-control"></select>
-                            </div>
-                        </div> -->
-
-
                         <div class="row">
                             <div class="col-12">
                                 <button class="btn btn-primary" type="submit"><i
@@ -333,4 +315,4 @@
 <script src="<?=BASE?>views/plugins/pdfmake/pdfmake.min.js"></script>
 
 <script src="<?=BASE?>views/plugins/Toast/js/Toast.min.js"></script>
-<script src="<?=BASE?>views/dist/js/scripts/agendarCitas.js?ver=1.1.1.3"></script>
+<script src="<?=BASE?>views/dist/js/scripts/agendarCitas.js?ver=1.1.1.6"></script>

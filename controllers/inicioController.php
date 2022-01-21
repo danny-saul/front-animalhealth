@@ -25,6 +25,7 @@ class InicioController{
     public function asistente(){
         include_once 'views/contents/asistente.php';
 
+        
      
     }
 

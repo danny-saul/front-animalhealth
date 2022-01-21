@@ -9,6 +9,7 @@
          cargarProducto();
          agregar_producto_item();
         guardarVentas();
+        cargarIva();
         
       
        
@@ -23,7 +24,7 @@
             type: 'GET',
             dataType: 'json',
             success: function (response) {
-                console.log(response);
+        //        console.log(response);
                 if (response.status) { 
                     let tr = '';
                     let i = 1;
@@ -239,6 +240,7 @@
                 detalle_venta:object.detalle_venta 
                 
             }
+            console.log(json);
 
             ajaxGuardarVenta(json);
           
@@ -283,6 +285,31 @@
         });
 
     
+    }
+
+    
+    function cargarIva(){
+        $.ajax({
+            url:urlServidor  +'configuracion/listar/'+1,
+            type:'GET',
+            dataType:'json',
+            success:function(response){
+            //    console.log(response);
+                if(response.status){
+    
+                   $('#numero-porcentaje').text(response.configuracion.iva);
+               
+                  
+                } 
+            },
+            error : function(jqXHR, status, error) {
+                console.log('Disculpe, existió un problema');
+            },
+            complete : function(jqXHR, status) {
+                // console.log('Petición realizada');
+            }
+        });
+
     }
     
 //});
@@ -344,33 +371,52 @@ function seleccionar_producto(id) {
 }
 
 function actualizar_total(){
-    let tr = $('#body-aggProducto tr');
-    let descuento_input = parseFloat($('#venta-descuento-input').val());
-    let subtotal = 0;
-    let descuento =0;
-    let total = 0;
-  
-    for(let i=0; i < tr.length; i++){
-        let hijos = tr[i].children;
-        subtotal += parseFloat(hijos[3].innerText);       
-    }
-    let iva = Number(subtotal.toFixed(2)) * 0.12;
-    descuento = descuento_input;
+    $.ajax({
+        url:urlServidor  +'configuracion/listar/'+1,
+        type:'GET',
+        dataType:'json',
+        success:function(response){
+        //    console.log(response);
+            if(response.status){
+                let tr = $('#body-aggProducto tr');
+                let descuento_input = parseFloat($('#venta-descuento-input').val());
+                let subtotal = 0;
+                let descuento =0;
+                let total = 0;
+              
+                for(let i=0; i < tr.length; i++){
+                    let hijos = tr[i].children;
+                    subtotal += parseFloat(hijos[3].innerText);       
+                }
+                let iva = Number(subtotal.toFixed(2)) * (response.configuracion.iva)/100;
+                descuento = descuento_input;
+             
+                if(descuento > 0){
+                    total = subtotal - descuento + iva;
+                }else{
+                    total = Number(subtotal) + Number(iva.toFixed(2));
+                }
+            
+             /*    $('#total-general').val(total); //guardar en la bd
+            
+                $('#total-detalle').text(total.toFixed(2));  //mostra en la tabla */
+            
+                $('#venta-subtotal').text(subtotal.toFixed(2));
+                $('#venta-iva').text(iva.toFixed(2));
+                $('#venta-descuento').text(descuento.toFixed(2));
+                $('#venta-totalg').text(total.toFixed(2));
+           
+              
+            } 
+        },
+        error : function(jqXHR, status, error) {
+            console.log('Disculpe, existió un problema');
+        },
+        complete : function(jqXHR, status) {
+            // console.log('Petición realizada');
+        }
+    });
  
-    if(descuento > 0){
-        total = subtotal - descuento + iva;
-    }else{
-        total = Number(subtotal) + Number(iva.toFixed(2));
-    }
-
- /*    $('#total-general').val(total); //guardar en la bd
-
-    $('#total-detalle').text(total.toFixed(2));  //mostra en la tabla */
-
-    $('#venta-subtotal').text(subtotal.toFixed(2));
-    $('#venta-iva').text(iva.toFixed(2));
-    $('#venta-descuento').text(descuento.toFixed(2));
-    $('#venta-totalg').text(total.toFixed(2));
 }
 
 function borrar_item(id){
@@ -385,39 +431,59 @@ function borrar_item(id){
 
 
 function calcular_descuento(){
-    $('#venta-descuento-input').blur(function(e){
-        let descuento_input = $('#venta-descuento-input').val();
-        let subtotal = $('#venta-subtotal').text();
-
-        let descuento = 0;
-        let total = 0;
-
-        if(parseFloat(descuento) > parseFloat(subtotal)){
-            Swal.fire(
-                'venta',
-                'El descuento no puede ser mayor al subtotal',
-                'error'
-              )
-              $('#venta-descuento-input').val('0');
-        }else{
-            let iva = Number(parseFloat(subtotal).toFixed(2)) * 0.12;
-            descuento = descuento_input;
-
-            if(descuento > 0){
-                total = subtotal - descuento + iva;
-            }else{
-                total = Number(subtotal) + Number(iva.toFixed(2));
-            }
-
-            $('#venta-subtotal').text(parseFloat(subtotal).toFixed(2));
-            $('#venta-iva').text(iva.toFixed(2));
-            $('#venta-descuento').text(parseFloat(descuento).toFixed(2));
-            $('#venta-totalg').text(total.toFixed(2));
+    $.ajax({
+        url:urlServidor  +'configuracion/listar/'+1,
+        type:'GET',
+        dataType:'json',
+        success:function(response){
+        //    console.log(response);
+            if(response.status){
+                $('#venta-descuento-input').blur(function(e){
+                    let descuento_input = $('#venta-descuento-input').val();
+                    let subtotal = $('#venta-subtotal').text();
+            
+                    let descuento = 0;
+                    let total = 0;
+            
+                    if(parseFloat(descuento) > parseFloat(subtotal)){
+                        Swal.fire(
+                            'venta',
+                            'El descuento no puede ser mayor al subtotal',
+                            'error'
+                          )
+                          $('#venta-descuento-input').val('0');
+                    }else{
+                        let iva = Number(parseFloat(subtotal).toFixed(2)) * (response.configuracion.iva)/100;
+                        descuento = descuento_input;
+            
+                        if(descuento > 0){
+                            total = subtotal - descuento + iva;
+                        }else{
+                            total = Number(subtotal) + Number(iva.toFixed(2));
+                        }
+            
+                        $('#venta-subtotal').text(parseFloat(subtotal).toFixed(2));
+                        $('#venta-iva').text(iva.toFixed(2));
+                        $('#venta-descuento').text(parseFloat(descuento).toFixed(2));
+                        $('#venta-totalg').text(total.toFixed(2));
+                    }
+            
+            
+            
+                });
+           
+              
+            } 
+        },
+        error : function(jqXHR, status, error) {
+            console.log('Disculpe, existió un problema');
+        },
+        complete : function(jqXHR, status) {
+            // console.log('Petición realizada');
         }
-
-
-
     });
+
+  
 
     
 }

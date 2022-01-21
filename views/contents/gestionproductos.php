@@ -88,29 +88,22 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
-                                        <label>Precio Venta</label>
-                                        <input type="text" class="form-control" id="new-producto-Pventa">
+                                        <label>Fecha de registro</label>
+                                        <input type="date" class="form-control" id="new-producto-fecha">
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
 
-                                <div class="col-6">
+                                <div class="col-12">
                                     <div class="form-group">
                                         <label>Descripcion</label>
                                         <textarea id="new-producto-descripcion" class="form-control"
                                             rows="3"></textarea>
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Fecha de registro</label>
-                                        <input type="date" class="form-control" id="new-producto-fecha">
 
-
-                                    </div>
-                                </div>
 
                             </div>
 
@@ -197,7 +190,7 @@
                 <div class="contanier-fluid">
                     <div class="row">
 
-                        <div class="col-12 col-md-4 form-group mt-3">
+                        <div class="col-12 col-md-10 mt-3">
                             <form id="nueva-categoria" method="POST">
                                 <label for="">Categoria</label>
                                 <input id="new-categoria-nombre" type="text" name="categoria" class="form-control"
@@ -206,39 +199,41 @@
                                     <i class="fas fa-save mr-2"></i>Guardar
                                 </button>
                             </form>
-                        </div>
 
-                        <div class="col-12 col-md-8">
-                            <div class="card card-dark">
-                                <div class="card-header">
-                                    <h3 class="card-title">Listado de Categorias</h3>
+                            <div class="col-12 mt-3">
+                                <div class="card card-dark">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Listado de Categorias</h3>
 
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
-                                                class="fas fa-minus"></i>
-                                        </button>
+                                        <div class="card-tools">
+                                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                                    class="fas fa-minus"></i>
+                                            </button>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-body">
+                                        <div class="div" style="overflow: auto;">
+                                            <table id="tabla-categoria" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 10px">#</th>
+                                                        <th>Categoria</th>
+                                                        <th>Acciones</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                            </table>
+                                        </div>
                                     </div>
 
                                 </div>
-
-                                <div class="card-body">
-                                    <div class="div" style="overflow: auto;">
-                                        <table id="tabla-categoria" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 10px">#</th>
-                                                    <th>Categoria</th>
-                                                    <th>Acciones</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                        </table>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
+
+
                     </div>
                 </div>
             </div>
