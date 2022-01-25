@@ -89,7 +89,7 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label>Fecha de registro</label>
-                                        <input type="date" class="form-control" id="new-producto-fecha">
+                                        <input type="date" class="form-control" required  min=<?php $hoy=date("Y-m-d"); echo $hoy;?> id="new-producto-fecha">
                                     </div>
                                 </div>
                             </div>

@@ -3,12 +3,12 @@ $(function () {
     _init();
 
     function _init() {
-        cargarTablaCompras();
+        cargarTablaVentas();
     }
 
-    function cargarTablaCompras() {
+    function cargarTablaVentas() {
 
-        $('#buscar-datos-compras').click(function () {
+        $('#buscar-datos-ventas').click(function () {
             let fecha_inicio = $('#fecha-inicio-r').val();
             let fecha_fin = $('#fecha-fin-r').val();
 
@@ -28,15 +28,15 @@ $(function () {
                 let fecha = f.getDate() + '/' + (f.getMonth() + 1) + '/' + f.getFullYear();
                 let hora = f.getHours() + ':' + (f.getMinutes()) + ':' + f.getSeconds();
 
-                $('#inicio-r-c').text(fecha_inicio);
-                $('#fin-r-c').text(fecha_fin);
+                $('#inicio-r-v').text(fecha_inicio);
+                $('#fin-r-v').text(fecha_fin);
                 $('#fecha-consulta').text(fecha);
                 $('#hora-consulta').text(hora);
 
-                $('#tabla-reporte').removeClass('d-none');
+                $('#tabla-reporte-venta').removeClass('d-none');
 
                 $.ajax({
-                url: urlServidor + 'compras/comprasmensuales/' + fecha_inicio + '/' + fecha_fin,
+                url: urlServidor + 'ventas/ventasmensuales/' + fecha_inicio + '/' + fecha_fin,
                     type: 'GET',
                         dataType: 'json',
                             success: function (response) {
@@ -56,7 +56,7 @@ $(function () {
                                     `;
                                     i++;   
                                     });
-                                    $('#body-reporte-compra').html(tr);
+                                    $('#body-reporte-venta').html(tr);
                                     $('#totales').html('Totales');
                                     $('#subtotal-general').html(response.totales.subtotal);
                                     $('#iva-general').html(response.totales.iva);
@@ -131,7 +131,7 @@ $(function () {
                                         options: barChartOptions
                                     });
                                 }else{
-                                     toastr["warning"]('No hay informacion disponible', "Reporte Compras");
+                                     toastr["warning"]('No hay informacion disponible', "Reporte Ventas");
 
                                 }
 

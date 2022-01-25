@@ -62,7 +62,7 @@ $(function(){
             type:'GET',
             dataType:'json',
             success:function(response){
-            //    console.log(response);
+                console.log(response);
                 if(response.status){
                 
                    $('#total-compras').text('$' + response.total);

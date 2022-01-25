@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Reportes de Compras Mensuales</h1>
+                <h1 class="m-0">Reportes de Ventas Mensuales</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -34,21 +34,21 @@
                                 <input id="fecha-fin-r" type="date" class="form-control">
                             </div>
                             <div class="col-6 col-md-4 col-lg-3 form-group">
-                                <button class="btn btn-primary btn-sm " id="buscar-datos-compras"
+                                <button class="btn btn-primary btn-sm " id="buscar-datos-ventas"
                                     style="margin-top: 35px;">
                                     <i class=" fa fa-search  "></i> </button>
                             </div>
                         </div>
 
-                        <div id="tabla-reporte" class="row bg-white d-none">
+                        <div id="tabla-reporte-venta" class="row bg-white d-none">
                             <div class="col-12 mt-2">
                                 <div class="row">
                                     <div class="col-6 col-md-8 col-lg-9" style="padding-left: 125px;">
                                         <h3><b>ANIMALHEALTH</b></h3>
-                                        <h6>Compras Mensuales</h6>
+                                        <h6>Ventas Mensuales</h6>
                                         <h6 class="text-danger">Desde:
-                                            <span class="text-dark" id="inicio-r-c"></span> - Hasta:
-                                            <span class="text-dark" id="fin-r-c"></span>
+                                            <span class="text-dark" id="inicio-r-v"></span> - Hasta:
+                                            <span class="text-dark" id="fin-r-v"></span>
                                         </h6>
                                     </div>
                                     <div class="col-6-col-md-4 col-lg-3">
@@ -71,13 +71,13 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
-                                                                <th>Detalle de Compras Mensuales De:</th>
+                                                                <th>Detalle de Ventas Mensuales De:</th>
                                                                 <th>Subtotal</th>
                                                                 <th>Iva</th>
                                                                 <th>Total</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody id="body-reporte-compra">
+                                                        <tbody id="body-reporte-venta">
 
                                                         </tbody>
                                                         <tfoot>
@@ -95,7 +95,7 @@
                                     </div>
 
                                     <div class="col-12 col-md-8">
-                                        <h3 class="card-title"><b>Compras Mensuales</b></h3>
+                                        <h3 class="card-title"><b>Ventas Mensuales</b></h3>
                                         <div id="canvas1" class="w-10 d-flex justify-content-center">
 
                                         </div>
@@ -118,4 +118,4 @@
 <script src="<?=BASE?>views/plugins/moment/moment.min.js"></script>
 <script src="<?=BASE?>views/plugins/html2pdf/html2pdf.bundle.js"></script>
 <script src="<?=BASE?>views/plugins/Toast/js/Toast.min.js"></script>
-<script src="<?=BASE?>views/dist/js/scripts/reportescompras.js?ver=1.1.1.3"></script>
+<script src="<?=BASE?>views/dist/js/scripts/reportesventas.js"></script>
