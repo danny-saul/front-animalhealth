@@ -37,13 +37,15 @@
                                 <button class="btn btn-primary btn-sm " id="buscar-datos-ventas"
                                     style="margin-top: 35px;">
                                     <i class=" fa fa-search  "></i> </button>
+                                    <button class="btn btn-primary btn-sm " id="btn-imprimir" style="margin-top: 35px;">
+                                    <i class="far fa-file-pdf"></i> Imprimir</button>
                             </div>
                         </div>
 
                         <div id="tabla-reporte-venta" class="row bg-white d-none">
                             <div class="col-12 mt-2">
                                 <div class="row">
-                                    <div class="col-6 col-md-8 col-lg-9" style="padding-left: 125px;">
+                                    <div class="col-6 col-md-8 col-lg-9" style="padding-left: 125px;  margin-top: 65px;">
                                         <h3><b>ANIMALHEALTH</b></h3>
                                         <h6>Ventas Mensuales</h6>
                                         <h6 class="text-danger">Desde:
@@ -53,7 +55,7 @@
                                     </div>
                                     <div class="col-6-col-md-4 col-lg-3">
                                         <img src="<?=BASE?>views/dist/css/logincss/images/logo22.gif" alt="IMG"
-                                            width="260px" style="margin-left: -100px;margin-top: -100px;">
+                                            width="260px" style="margin-left: -100px;margin-top: -30px;">
                                     </div>
                                 </div>
 

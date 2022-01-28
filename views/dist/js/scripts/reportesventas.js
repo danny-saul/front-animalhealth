@@ -4,6 +4,7 @@ $(function () {
 
     function _init() {
         cargarTablaVentas();
+        imprimir();
     }
 
     function cargarTablaVentas() {
@@ -152,6 +153,21 @@ $(function () {
 
 
         
+    }
+
+    function imprimir(){
+        $('#btn-imprimir').click(function(){
+                let element = document.getElementById('tabla-reporte');
+                let opt = {
+                margin:       0.5,
+                filename:     'Reporte Ventas.pdf',
+                image:        { type: 'jpeg', quality: 3 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'mm', format: 'legal', orientation: 'portrait' }
+                };
+  
+                html2pdf().set(opt).from(element).save();
+        });
     }
 
 });

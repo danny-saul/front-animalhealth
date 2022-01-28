@@ -5,6 +5,7 @@ $(function () {
     function _init() {
         cargaragendamientoxdc();
         cargarDoctor();
+        imprimir();
     }
 
     function cargarDoctor() {
@@ -111,6 +112,21 @@ $(function () {
 
         });
 
+    }
+
+    function imprimir(){
+        $('#btn-imprimir').click(function(){
+                let element = document.getElementById('tabla-reporte-doc');
+                let opt = {
+                margin:       0.5,
+                filename:     'Reporte Agendamiento por Medico.pdf',
+                image:        { type: 'jpeg', quality: 3 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'mm', format: 'legal', orientation: 'portrait' }
+                };
+  
+                html2pdf().set(opt).from(element).save();
+        });
     }
 
 

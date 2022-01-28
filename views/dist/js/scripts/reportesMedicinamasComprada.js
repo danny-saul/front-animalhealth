@@ -4,6 +4,7 @@ $(function () {
 
     function _init() {
         cargarmedicina();
+        imprimir();
     }
 
 
@@ -137,6 +138,23 @@ $(function () {
         });
 
     }
+
+    function imprimir(){
+        $('#btn-imprimir').click(function(){
+                let element = document.getElementById('tabla-reporte-m');
+                let opt = {
+                margin:       0.5,
+                filename:     'Reporte Medicina mas Comprada.pdf',
+                image:        { type: 'jpeg', quality: 3 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'mm', format: 'legal', orientation: 'portrait' }
+                };
+  
+                html2pdf().set(opt).from(element).save();
+        });
+    }
+
+    
 
 
 

@@ -6,6 +6,7 @@ $(function () {
         cargar();
         cargarCliente();
         abrirModalCliente();
+        imprimir();
     }
 
     function abrirModalCliente() {
@@ -57,8 +58,7 @@ $(function () {
 
 
     }
-
-
+    
     function cargar() {
         $('#btn-consulta').click(function () {
             let fecha_inicio = $('#fecha-inicio-r-s').val();
@@ -198,6 +198,21 @@ $(function () {
 
         });
 
+    }
+
+    function imprimir(){
+        $('#btn-imprimir').click(function(){
+                let element = document.getElementById('tabla-reporte-mascotas');
+                let opt = {
+                margin:       0.5,
+                filename:     'Reporte Mascotas mas atendidas.pdf',
+                image:        { type: 'jpeg', quality: 3 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'mm', format: 'legal', orientation: 'portrait' }
+                };
+  
+                html2pdf().set(opt).from(element).save();
+        });
     }
 
 });

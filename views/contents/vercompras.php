@@ -77,9 +77,10 @@
             <div class="modal-body">
                 <div class="col-12">
                     <div class="">
-                        <div class="card">
+                        <div class="card" id="detalle-compra-imprimir">
                             <div class="card-header p-4">
-                                <a class="pt-2 d-inline-block" data-abc="true">Nota de Venta: # <span id="compra-numero"></span></a>
+                                <a class="pt-2 d-inline-block" data-abc="true">Nota de Venta: # <span
+                                        id="compra-numero"></span></a>
                                 <div class="float-right">
                                     <h4 class="mb-0">Codigo: <span id="compra-codigo"></span></h4>
                                     Fecha Compra: <span id="compra-fecha"></span>
@@ -114,8 +115,8 @@
                                             </tr>
                                         </thead>
                                         <tbody id="body_detalle_compra">
-                                          
-                                         
+
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -159,6 +160,12 @@
                             <div class="card-footer bg-white">
                                 <p class="mb-0">Animal Helth Gracias por su compra</p>
                             </div>
+                            <form id="nueva-impresion" method="POST">
+                                <button class="btn btn-primary btn-sm " type="submit" style="margin-top: 35px;">
+                                    <i class="far fa-file-pdf"></i> Imprimir</button>
+                            </form>
+
+
                         </div>
                     </div>
                 </div>
@@ -180,6 +187,7 @@
 <script src="<?=BASE?>views/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
 <script src="<?=BASE?>views/plugins/jszip/jszip.min.js"></script>
 <script src="<?=BASE?>views/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="<?=BASE?>views/plugins/html2pdf/html2pdf.bundle.js"></script>
 
 
 <script src="<?=BASE?>views/plugins/Toast/js/Toast.min.js"></script>

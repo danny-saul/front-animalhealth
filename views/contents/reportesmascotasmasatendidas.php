@@ -48,9 +48,12 @@
                             </div>
 
                             <div class="col-6 col-md-4 col-lg-3 form-group ">
+                                <div class="row" id="imprimir-detalle">
+
+                                </div>
                                 <button class="btn btn-dark btn-sm " id="btn-consulta" style="margin-top: 35px;">
                                     <i class=" fa fa-search  "></i> Consultar</button>
-                                <button class="btn btn-primary btn-sm " id="" style="margin-top: 35px;">
+                                <button class="btn btn-primary btn-sm " id="btn-imprimir" style="margin-top: 35px;">
                                     <i class="far fa-file-pdf"></i> Imprimir</button>
                             </div>
 
