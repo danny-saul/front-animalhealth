@@ -37,10 +37,10 @@
                                 <label for="">Limite</label>
                                 <select id="limite" class="form-control">
                                     <option value="0">Seleccione un limite</option>
-                                    <option value="3">3</option>
-                                    <option value="5">5</option>
                                     <option value="10">10</option>
-                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="40">40</option>
                                 </select>
                             </div>
                             <div class="col-6 col-md-4 col-lg-3 form-group ">
@@ -85,8 +85,8 @@
                                                                 <th>#</th>
                                                                 <th>Nombre de Servicio</th>
                                                                 <th>Cantidad Adquiridas</th>
-                                                                <th>Precio</th>
-                                                                <th>Total</th>
+                                                                <th> Total </th>
+                                                                <th></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody id="body-reporte-servicio">
@@ -94,8 +94,8 @@
                                                         </tbody>
                                                         <tfoot>
                                                             <th></th>
-                                                            <th></th>
-                                                            <th></th>
+                                                             <th></th>
+                                                        <!--    <th></th> -->
                                                             <th id="totales-s" class="text-danger"></th>
                                                             <th id="total-general-s" class="text-danger"></th>
 

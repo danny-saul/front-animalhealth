@@ -58,7 +58,7 @@ $(function () {
 
 
     }
-    
+
     function cargar() {
         $('#btn-consulta').click(function () {
             let fecha_inicio = $('#fecha-inicio-r-s').val();
@@ -106,7 +106,6 @@ $(function () {
                     if (response) {
                         let i = 1;
 
-
                         response.lista.data.forEach(element => {
 
                             tr += `
@@ -129,9 +128,9 @@ $(function () {
                         $('#canvas1').html('');
 
                         let canvas1 = `
-                  <canvas id="box-barra1" 
-                      style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%; margin-top:22px">
-                  </canvas>`;
+                        <canvas id="box-barra1" 
+                            style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%; margin-top:22px">
+                        </canvas>`;
                         $('#canvas1').html(canvas1);
 
                         let areaChartData = {
@@ -147,19 +146,12 @@ $(function () {
                                     pointHighlightStroke: 'rgba(60,141,188,1)',
                                     data: response.grafico.datos
                                 },
-
-
                             ]
-
                         }
-
-
-
 
                         var barChartCanvas = $('#box-barra1').get(0).getContext('2d');
                         var barChartData = $.extend(true, {}, areaChartData);
                         var temp0 = areaChartData.datasets[0];
-
 
                         areaChartData.datasets[0] = temp0;
 
@@ -175,18 +167,9 @@ $(function () {
                             type: 'pie',
                             data: barChartData,
                             options: barChartOptions
-
-
                         });
-
-
-
                     } else {
-                        toastr.options = {
-                            "closeButton": true,
-                            "preventDuplicates": true,
-                            "positionClass": "toast-top-center",
-                        };
+                        
                         toastr["info"]('No hay informacion disponible', "Reporte Mascotas mas Atendidas");
                     }
                 }
@@ -200,18 +183,18 @@ $(function () {
 
     }
 
-    function imprimir(){
-        $('#btn-imprimir').click(function(){
-                let element = document.getElementById('tabla-reporte-mascotas');
-                let opt = {
-                margin:       0.5,
-                filename:     'Reporte Mascotas mas atendidas.pdf',
-                image:        { type: 'jpeg', quality: 3 },
-                html2canvas:  { scale: 2 },
-                jsPDF:        { unit: 'mm', format: 'legal', orientation: 'portrait' }
-                };
-  
-                html2pdf().set(opt).from(element).save();
+    function imprimir() {
+        $('#btn-imprimir').click(function () {
+            let element = document.getElementById('tabla-reporte-mascotas');
+            let opt = {
+                margin: 0.5,
+                filename: 'Reporte Mascotas mas atendidas.pdf',
+                image: { type: 'jpeg', quality: 3 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'legal', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save();
         });
     }
 

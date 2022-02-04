@@ -63,7 +63,7 @@ $(function () {
                                 <th>${i}</th>
                                 <th>${element.nombre_servicio}</th>
                                 <th>${element.cantidad}</th>
-                                <th>${element.precio}</th>
+                                
                                 <th>${element.precio}</th> 
                             </tr>
                         `;

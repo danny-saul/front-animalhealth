@@ -25,11 +25,11 @@
                 <div class="card card-danger shadow">
                     <div class="card-body">
                         <div class="row mb-3 d-flex justify-content-center">
-                            <div class="col-6 col-md-3 col-lg-2 form-group ">
+                            <div class="col-6 col-md-3 col-lg-3 form-group ">
                                 <label for="">Fecha Inicio</label>
                                 <input id="fecha-inicio-r-s" type="date" class="form-control">
                             </div>
-                            <div class="col-6 col-md-3 col-lg-2 form-group ">
+                            <div class="col-6 col-md-3 col-lg-3 form-group ">
                                 <label for="">Fecha fin</label>
                                 <input id="fecha-fin-r-s" type="date" class="form-control">
                             </div>
@@ -41,7 +41,7 @@
 
                             </div>
 
-                            <div class="col-6 col-md-4 col-lg-3 form-group">
+                            <div class="col-6 col-md-4 col-lg-1 form-group">
                                 <button class="btn btn-primary btn-sm " id="buscar-datos-cliente"
                                     style="margin-top: 35px;">
                                     <i class=" fa fa-search  "></i> </button>
@@ -90,7 +90,7 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
-                                                                <th>Nombre de Maacota</th>
+                                                                <th>Nombre de Mascota</th>
                                                                 <th>Tipo Mascota</th>
                                                                 <th>Veces Atendidas</th>
                                                                 <th>Servicio</th>
