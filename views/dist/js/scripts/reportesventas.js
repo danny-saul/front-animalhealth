@@ -157,7 +157,7 @@ $(function () {
 
     function imprimir(){
         $('#btn-imprimir').click(function(){
-                let element = document.getElementById('tabla-reporte');
+                let element = document.getElementById('tabla-reporte-venta');
                 let opt = {
                 margin:       0.5,
                 filename:     'Reporte Ventas.pdf',
