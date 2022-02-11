@@ -19,7 +19,10 @@
 <!-- Main content -->
 <div class="content">
     <div class="container-fluid">
+
+
         <div class="row pb-2">
+            <!--
             <div class="col-md-6">
                 <div class="card-body">
 
@@ -121,8 +124,8 @@
 
                 </div>
             </div>
-
-            <div class="col-md-6">
+-->
+            <div class="col-md-12">
                 <div class="card-body">
 
                     <div class="row">
@@ -148,12 +151,19 @@
                                                         class="fa fa-search mr-2"></i>Buscar Doctor</button>
 
                                             </div>
+
+                        <!--                     <div class="col-12 text-right">
+                                                <button class="btn btn-primary btn-sm" id="abrir-preguntas"><i
+                                                        class="fa fa-search mr-2"></i>KPI</button>
+
+                                            </div> -->
                                         </div>
                                         <div class="row">
 
                                             <div class="col-12 col-md-6 form-group">
                                                 <label for="">Nombres</label>
                                                 <input type="hidden" id="doctor-id">
+                                                <input type="hidden" id="c-cli-id-c">
                                                 <input id="new-doctor-nombre" readonly type="text" class="form-control">
                                             </div>
                                             <div class="col-12 col-md-6 form-group">
@@ -167,7 +177,8 @@
                                             <div class="col-6 form group">
                                                 <!--min=<php date("Y-m-d");?>   -->
                                                 <label for="">Dias</label>
-                                                <input id="new-dias-d-c" type="date" required  min=<?php $hoy=date("Y-m-d"); echo $hoy;?> name="fecha"
+                                                <input id="new-dias-d-c" type="date" required
+                                                    min=<?php $hoy=date("Y-m-d"); echo $hoy;?> name="fecha"
                                                     class="form-control">
 
                                             </div>
@@ -326,9 +337,62 @@
 </div>
 
 
+<!-- MODAL KPI EVUALUACION -->
+
+<div class="modal fade" id="modal-kpi-evaluacion">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h4 class="modal-title">Evalue los Servicios Entregados por Animal Health</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row" style="height: 200px !important; overflow: auto;">
+                    <div class="col-12">
+                        <div class="tabla-buscar-mascota">
+                            <h5>Como evaluaria su sastifaccion respecto al servicio entregado?</h5>
+                            <div class="card-body">
+                            <form action="">
+                                <div class="row">
+                                    <div class="col-12 col-md-6 form-group  " id="hora-cita-a">
+                                        <label for="">Servicio al Cliente</label>
+                                        <select id="new-kpi-pregunta" class="form-control"></select>
+                                    </div>
+                                
+                                </div>
+
+                            </form>
+
+                            <div class="row">
+                                        <div class="col-12 btn-center">
+                                            <button style="margin-top: 18px;" id="btn-guardar-kpi-cliente"
+                                                class="btn btn-block btn-outline-primary">Guardar</button>
+                                        </div>
+                                    </div>
+                            </div>
+
+
+                      
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+
 
 <!-- MOdal de raza -->
-<div class="modal fade" id="modal-raza-cliente">
+
+<!-- <div class="modal fade" id="modal-raza-cliente">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header bg-primary">
@@ -370,10 +434,10 @@
             <div class="modal-footer justify-content-between">
             </div>
         </div>
-        <!-- /.modal-content -->
+    
     </div>
-    <!-- /.modal-dialog -->
-</div>
+   
+</div> -->
 
 <script src="<?=BASE?>views/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="<?=BASE?>views/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

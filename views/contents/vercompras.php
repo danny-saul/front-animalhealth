@@ -160,13 +160,12 @@
                             <div class="card-footer bg-white">
                                 <p class="mb-0">Animal Helth Gracias por su compra</p>
                             </div>
-                            <form id="nueva-impresion" method="POST">
-                                <button class="btn btn-primary btn-sm " type="submit" style="margin-top: 35px;">
-                                    <i class="far fa-file-pdf"></i> Imprimir</button>
-                            </form>
+
 
 
                         </div>
+                        <button class="btn btn-primary btn-sm" id="btn-imprimir" style="margin-top: 35px;">
+                            <i class="far fa-file-pdf"></i> Imprimir</button>
                     </div>
                 </div>
             </div>
@@ -191,4 +190,4 @@
 
 
 <script src="<?=BASE?>views/plugins/Toast/js/Toast.min.js"></script>
-<script src="<?=BASE?>views/dist/js/scripts/vercomprasconsultas.js"></script>
+<script src="<?=BASE?>views/dist/js/scripts/vercomprasconsultas.js?ver=1.1.1.1"></script>

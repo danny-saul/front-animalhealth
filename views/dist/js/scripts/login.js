@@ -77,19 +77,23 @@ $(function(){
     
     function validar(correo, clave){
         if(correo.length == 0){
-          /*   new Toast({
-                message: 'Ingrese una cédula',
-                type: 'danger'
-            }); */
-            alert(' Ingrese correo');
+            toastr.options = {
+                "closeButton": true,
+                "preventDuplicates": true,
+                "positionClass": "toast-top-center",
+            };
+            toastr["error"]('Ingrese Correo', "Login")
+          
             return false;
         }else
         if(clave.length == 0){
-           /*  new Toast({
-                message: 'Ingrese una clave',
-                type: 'danger'
-            }); */
-            alert(' Ingrese clave');
+            toastr.options = {
+                "closeButton": true,
+                "preventDuplicates": true,
+                "positionClass": "toast-top-center",
+            };
+            toastr["error"]('Ingrese su contrasenia', "Login")
+         
             return false;
         }else
         {

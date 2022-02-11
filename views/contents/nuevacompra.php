@@ -76,13 +76,13 @@
 
                                     </div>
                                 </div> -->
-                                <div class="form-group row">
+                             <!--    <div class="form-group row">
                                     <label class="col-sm-4  col-form-label">Descuento :</label>
                                     <div class="col-sm-8">
                                         <input id="compra-descuento-input" type="text" value="0.00"
                                             class="form-control form-control-sm decimal">
                                     </div>
-                                </div>
+                                </div> -->
 
 
 

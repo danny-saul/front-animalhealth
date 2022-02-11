@@ -210,10 +210,6 @@
                             class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
-
-
-
-
         </div>
 
         <div class="row">
@@ -225,12 +221,13 @@
                             <div class="col-12 col-md-6">
                                 <figure class="highcharts-figure">
                                     <div id="container-speed" class="chart-container"></div>
-                                    <div id="container-rpm" class="chart-container"></div>
+                                    <div id="container-por1" class="chart-container"></div>
+
                                 </figure>
                             </div>
                             <div class="col-12 col-md-6">
                                 <figure class="highcharts-figure">
-                                    <div id="container-por1" class="chart-container"></div>
+                                    <div id="container-rpm" class="chart-container"></div>
                                     <div id="container-por2" class="chart-container"></div>
                                 </figure>
                             </div>
@@ -242,6 +239,55 @@
                 <!-- /.card -->
             </div>
             <!-- /.col -->
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-danger shadow">
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-2 col-md-3 form-group ">
+                                <label for="">Fecha Inicio</label>
+                                <input id="fecha-inicio-kpi" type="date" class="form-control">
+                            </div>
+                            <div class="col-2 col-md-3 form-group ">
+                                <label for="">Fecha fin</label>
+                                <input id="fecha-fin-kpi" type="date" class="form-control">
+                            </div>
+                            <div class="col-2 col-md-2 form-group ">
+                                <label for="">Año</label>
+                                <select id="year-select" class="form-control">
+                                    <option value="0">Seleccione un Año</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                                </select>
+                            </div>
+                            <div class="col-2 col-md-2 form-group ">
+                                <label for="">Presupuesto</label>
+                                <input id="presupuesto-kpi" type="text" class="form-control">
+                            </div>
+                            <div class="col-1 col-md-2 form-group">
+                                <button class="btn btn-dark btn-sm " id="btn-consulta" style="margin-top: 35px;">
+                                    <i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+
+                        <div id="tabla-reporte-kpiventas" class="row bg-white">
+                            <div class="col-8 mt-2">
+                                <div class="col-12 col-md-8">
+                                    <div id="canvas-kpi-ventas" class="w-10 d-flex justify-content-center">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="data-pre" class="col-4 d-none">
+                                <h3>Ejecucion Presupuestal: </h3>
+                                <h2><b id="eje-pre"></b></h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="row">
@@ -310,16 +356,9 @@
 
             </div>
         </div>
-
-
-
-
-
         <!-- /.row -->
     </div><!-- /.container-fluid -->
 </div>
-
-
 <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
@@ -332,9 +371,6 @@
 <script src="<?=BASE?>views/plugins/morris/morris.min.js"></script>
 
 
-<script src="<?=BASE?>views/plugins/Toast/js/Toast.min.js"></script>
-<script src="<?=BASE?>views/dist/js/scripts/dashboardAdministrador.js"></script>
-
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/highcharts-more.js"></script>
 <script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
@@ -342,4 +378,8 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
+
 <script src="<?=BASE?>views/plugins/jquery-knob/jquery.knob.min.js"></script>
+
+<script src="<?=BASE?>views/plugins/Toast/js/Toast.min.js"></script>
+<script src="<?=BASE?>views/dist/js/scripts/dashboardAdministrador.js"></script>

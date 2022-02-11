@@ -75,13 +75,12 @@ $(function () {
     }
 
     function imprimir(){
-        $('#nueva-impresion').submit(function(e){
+        $('#btn-imprimir').click(function(){
    
-            e.preventDefault();
                 let element = document.getElementById('detalle-compra-imprimir"');
                 let opt = {
                 margin:       0.5,
-                filename:     'Reporte Ventas.pdf',
+                filename:     'facturaimprimir.pdf',
                 image:        { type: 'jpeg', quality: 3 },
                 html2canvas:  { scale: 2 },
                 jsPDF:        { unit: 'mm', format: 'legal', orientation: 'portrait' }

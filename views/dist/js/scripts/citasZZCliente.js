@@ -15,6 +15,12 @@ $(function () {
        cargarMascotaCliente();
        guardarCitas();
        cargarTabla();
+
+       guardarkpi();
+      // cargarquestionkapei();
+
+
+    
     }
 
     function cargarTabla(){
@@ -335,6 +341,7 @@ $(function () {
              //   console.log('llene los datos de usuario');
             } else {
                 guardandomascota(json);
+                
 
             }
 
@@ -447,7 +454,11 @@ $(function () {
     }
 
 
-    function guardarCitas() {
+  /* GUARDAR CITAS ORIGINAL
+
+
+    
+  function guardarCitas() {
         $('#btn-guardar-cita-cliente').click(function (e) {
 
             let doctor_id =$('#doctor-id').val();
@@ -498,6 +509,102 @@ $(function () {
                     toastr["success"](response.mensaje, "Citas")
                     reseteandodatos(); 
                     cargarTabla();           
+                } else {
+                    toastr["error"](response.mensaje, "Citas")
+                }
+            },
+            error: function (jqXHR, status, error) {
+                console.log('Disculpe, existió un problema');
+            },
+            complete: function (jqXHR, status) {
+                // console.log('Petición realizada');
+            }
+        });
+
+    } */
+    
+    
+    function guardarCitas() {
+ /*        $('#modal-kpi-evaluacion').modal('show');
+        $.ajax({
+            url: urlServidor + 'detalle/listardetalle',
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                // console.log(response);
+                if (response.status) {
+                    let option = '<option value="0">Seleccione Grado de Sastifaccion </option>';
+                    response.detalle.forEach(element => {
+                        option += `<option value=${element.id}>${element.detalle}</option>`;
+                    });
+
+                    $('#new-kpi-pregunta').html(option);
+
+                }
+            },
+            error: function (jqXHR, status, error) {
+                console.log('Disculpe, existió un problema');
+            },
+            complete: function (jqXHR, status) {
+                // console.log('Petición realizada');
+            }
+        }); */
+
+        $('#btn-guardar-cita-cliente').click(function (e) {
+
+            let doctor_id =$('#doctor-id').val();
+            let servicios_id = $('#new-servicio option:selected').val();
+            let mascota_id = $('#new-mascota-cita option:selected').val();
+            let cliente_id =$('#c-cli-id-c').val();
+            let horarios_atencion_id=$('#new-hora-cita option:selected').val();
+          //  console.log(horarios_atencion_id);
+
+        
+            let json = {
+                cita: {
+                    doctor_id,
+                    servicios_id,
+                    mascota_id,
+                    cliente_id,
+                    horarios_atencion_id
+                },
+            };
+            console.log(json);
+
+
+
+
+            //validacion para datos de usuario
+            if (!validarCita(json)) {
+             //   console.log('llene los datos de usuario');
+            } else {
+               guardandocitas(json);
+
+            }
+        
+        });
+    }
+
+    function guardandocitas(json){
+
+        $.ajax({
+            url: urlServidor + 'citas/guardar',
+            type: 'POST',
+            data: 'data=' + JSON.stringify(json),
+            dataType: 'json',
+            success: function (response) {
+                //    console.log(response);
+                toastr.options = {
+                    "closeButton": true,
+                    "preventDuplicates": true,
+                    "positionClass": "toast-top-center",
+                };
+
+                if (response.status) {
+                    toastr["success"](response.mensaje, "Citas")
+                    reseteandodatos(); 
+                    cargarTabla();  
+                    cargarquestionkapei();         
                 } else {
                     toastr["error"](response.mensaje, "Citas")
                 }
@@ -567,6 +674,129 @@ $(function () {
         $('#new-dias-d-c').val('');
         
     }
+
+
+
+//cargar podria eliminarse
+    function cargarquestionkapei() {
+      
+            $('#modal-kpi-evaluacion').modal('show');
+
+            $.ajax({
+                url: urlServidor + 'detalle/listardetalle',
+                type: 'GET',
+                dataType: 'json',
+                success: function (response) {
+                    // console.log(response);
+                    if (response.status) {
+                        let option = '<option value="0">Seleccione Grado de Sastifaccion </option>';
+                        response.detalle.forEach(element => {
+                            option += `<option value=${element.id}>${element.detalle}</option>`;
+                        });
+    
+                        $('#new-kpi-pregunta').html(option);
+    
+                    }
+                },
+                error: function (jqXHR, status, error) {
+                    console.log('Disculpe, existió un problema');
+                },
+                complete: function (jqXHR, status) {
+                    // console.log('Petición realizada');
+                }
+            });
+       
+       
+    
+    }
+
+
+  
+    function guardarkpi() {
+        $('#btn-guardar-kpi-cliente').click(function (e) {
+
+            let cliente_id =$('#c-cli-id-c').val();
+            let detalle_id = $('#new-kpi-pregunta option:selected').val();
+            let valoracion = '';
+            
+
+            toastr.options = {
+                "closeButton": true,
+                "preventDuplicates": true,
+                "positionClass": "toast-top-center",
+            };
+
+
+            if(cliente_id == 0){
+                toastr["warning"]("Selecione un Cliente", "Cliente");
+            }else
+            if(detalle_id == 0){
+                toastr["warning"]("Selecione un Detalle", "Detalle");
+            }else
+            if(detalle_id >= 3 && detalle_id < 6){
+                valoracion = 'P';
+            }else 
+            if(detalle_id <=3){
+                valoracion = 'N';
+            }
+                let json = {
+                    sastifaccion: {
+                        cliente_id,
+                        detalle_id,
+                        valoracion
+                
+                    },
+                };
+              //  console.log(json);
+
+            
+   
+          
+            //validacion para datos de usuario
+           // if (!validarCita(json)) {
+        
+           // } else {
+               guardandokpi(json);
+               $('#modal-kpi-evaluacion').modal('hide');
+
+        //    }
+        
+        });
+    }
+
+    function guardandokpi(json){
+
+        $.ajax({
+            url: urlServidor + 'sastifaccion/guardar',
+            type: 'POST',
+            data: 'data=' + JSON.stringify(json),
+            dataType: 'json',
+            success: function (response) {
+                //    console.log(response);
+                toastr.options = {
+                    "closeButton": true,
+                    "preventDuplicates": true,
+                    "positionClass": "toast-top-center",
+                };
+
+                if (response.status) {
+                    toastr["success"](response.mensaje, "kpi")
+                //    reseteandodatos(); 
+                  //  cargarTabla();           
+                } else {
+                    toastr["error"](response.mensaje, "kpi")
+                }
+            },
+            error: function (jqXHR, status, error) {
+                console.log('Disculpe, existió un problema');
+            },
+            complete: function (jqXHR, status) {
+                // console.log('Petición realizada');
+            }
+        });
+
+    } 
+    
 
    
 

@@ -115,5 +115,5 @@
 /* }); */
 
 function ver_cita(id){
-    alert(id);
+  //  alert(id);
 }

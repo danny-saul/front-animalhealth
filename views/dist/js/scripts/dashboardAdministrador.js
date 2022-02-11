@@ -6,6 +6,7 @@ $(function () {
         cargandoDatos();
         iniciar_grafico();
         kpisatisfaccion();
+        kpi_ventas();
     }
 
     function cargandoDatos() {
@@ -445,7 +446,7 @@ $(function () {
                             min: 0,
                             max: 100,
                             title: {
-                                text: 'Positivo'
+                                text: 'CSAT (Promedio) (+)'
                             }
                         },
     
@@ -460,43 +461,15 @@ $(function () {
                                 format:
                                     '<div style="text-align:center">' +
                                     '<span style="font-size:25px">{y}</span><br/>' +
-                                    '<span style="font-size:12px;opacity:0.4">Sastifacion del cliente</span>' +
-                                    '</div>'
+                                    '<span style="font-size:12px;opacity:0.4">Escala de Satisfacción</span>'+
+                                    '</div>' 
                             },
                             tooltip: {
                                 valueSuffix: ' km/h'
                             }
                         }]
-    
-                    }));
-    
-                    // The RPM gauge
-                    var chartRpm = Highcharts.chart('container-rpm', Highcharts.merge(gaugeOptions, {
-                        yAxis: {
-                            min: 0,
-                            max: 100,
-                            title: {
-                                text: 'Negativo'
-                            }
-                        },
-    
-                        series: [{
-                            name: 'Negativo',
-                            data: response.data2,
-                            dataLabels: {
-                                format:
-                                    '<div style="text-align:center">' +
-                                    '<span style="font-size:25px">{y:.1f}</span><br/>' +
-                                    '<span style="font-size:12px;opacity:0.4">' +
-                                    'Insastifacion del cliente' +
-                                    '</span>' +
-                                    '</div>'
-                            },
-                            tooltip: {
-                                valueSuffix: ' revolutions/min'
-                            }
-                        }]
-    
+
+            
                     }));
 
                     var chartPor1 = Highcharts.chart('container-por1', Highcharts.merge(gaugeOptions, {
@@ -504,7 +477,7 @@ $(function () {
                             min: 0,
                             max: 100,
                             title: {
-                                text: 'Positivo %'
+                                text: 'CSAT (Porcentaje) (%)'
                             }
                         },
     
@@ -528,13 +501,46 @@ $(function () {
                         }]
     
                     }));
+    
+                    // The RPM gauge
+                    var chartRpm = Highcharts.chart('container-rpm', Highcharts.merge(gaugeOptions, {
+                        yAxis: {
+                            min: 0,
+                            max: 100,
+                            title: {
+                                text: 'CSAT (Promedio) (-)' 
+                            }
+                        },
+
+                        credits: {
+                            enabled: false
+                        },
+    
+                        series: [{
+                            name: 'Negativo',
+                            data: response.data2,
+                            dataLabels: {
+                                format:
+                                '<div style="text-align:center">' +
+                                '<span style="font-size:25px">{y}</span><br/>' +
+                                '<span style="font-size:12px;opacity:0.4">Insastifacion del cliente</span>' +
+                                '</div>'
+                            },
+                            tooltip: {
+                                valueSuffix: ' revolutions/min'
+                            }
+                        }]
+    
+                    }));
+
+               
 
                     var chartPor2 = Highcharts.chart('container-por2', Highcharts.merge(gaugeOptions, {
                         yAxis: {
                             min: 0,
                             max: 100,
                             title: {
-                                text: 'Negativo %'
+                                text: 'CSAT (Porcentaje) (%)'
                             }
                         },
     
@@ -549,7 +555,7 @@ $(function () {
                                 format:
                                     '<div style="text-align:center">' +
                                     '<span style="font-size:25px">{y}</span><br/>' +
-                                    '<span style="font-size:12px;opacity:0.4">Sastifacion del cliente</span>' +
+                                    '<span style="font-size:12px;opacity:0.4">Insastifacion del cliente</span>' +
                                     '</div>'
                             },
                             tooltip: {
@@ -561,40 +567,6 @@ $(function () {
 
                 }
 
-
-
-                // Bring life to the dials
-                /* setInterval(function () {
-                    // Speed
-                    var point,
-                        newVal,
-                        inc;
-
-                    if (chartSpeed) {
-                        point = chartSpeed.series[0].points[0];
-                        inc = Math.round((Math.random() - 0.5) * 100);
-                        newVal = point.y + inc;
-
-                        if (newVal < 0 || newVal > 200) {
-                            newVal = point.y - inc;
-                        }
-
-                        point.update(newVal);
-                    }
-
-                    // RPM
-                    if (chartRpm) {
-                        point = chartRpm.series[0].points[0];
-                        inc = Math.random() - 0.5;
-                        newVal = point.y + inc;
-
-                        if (newVal < 0 || newVal > 5) {
-                            newVal = point.y - inc;
-                        }
-
-                        point.update(newVal);
-                    }
-                }, 2000); */
             },
             error: function (jqXHR, status, error) {
                 console.log('Disculpe, existió un problema');
@@ -604,6 +576,96 @@ $(function () {
             }
         });
 
+    }
+
+    function kpi_ventas(){
+        $('#btn-consulta').click(function(){
+            let fecha_inicio = $('#fecha-inicio-kpi').val();
+            let fecha_fin = $('#fecha-fin-kpi').val();
+            let year = $('#year-select option:selected').val();
+            let presupuesto = $('#presupuesto-kpi').val();
+
+            toastr.options = {
+                "closeButton": true,
+                "preventDuplicates": true,
+                "positionClass": "toast-top-center",
+            };
+
+            if (fecha_inicio.length == 0) {
+                toastr["warning"]('Seleccione una fecha de inicio', "Dashboard Administrador");
+            } else if (fecha_fin.length == 0) {
+                toastr["warning"]('Seleccione una fecha fin', "Dashboard Administrador");
+            } else if (moment(fecha_inicio).isAfter(fecha_fin)) {
+                toastr["warning"]('La fecha fin no puede ser menor', "Dashboard Administrador");
+            }else if(year == 0 ){
+                toastr["warning"]('Seleccione un año', "Dashboard Administrador");
+            } else {
+
+                $('#tabla-reporte-v').removeClass('d-none');
+            }
+
+            $.ajax({
+                url: urlServidor + 'ventas/kpiVenta/' + fecha_inicio + '/' + fecha_fin + '/' + year + '/' + presupuesto,
+                type: 'GET',
+                dataType: 'json',
+                    success: function (response) {
+                   console.log(response);
+                   if(response){
+                        /* Canvas Dashboard */
+
+                        $('#canvas-kpi-ventas').html('');
+
+                        let canvas1 = `
+                            <canvas id="box-barra1" 
+                                style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%; margin-top:22px">
+                            </canvas>`;
+                            $('#canvas-kpi-ventas').html(canvas1);
+
+                        let areaChartData = {
+                            labels : response.orden.labels,
+                            datasets: [
+                                {
+                                    label: 'Cantidad',
+                                    backgroundColor : ['#109dfa','#ff0000','#ffde00','#008f39','#b89ec4','#2f5264','#af4aad','#6de81e','#ff6961','#77dd77','#fdfd96','#84b6f4'],
+                                    pointRadius: false,
+                                    pointColor: '#3b8bba',
+                                    pointStrokeColor : 'rgba(60,141,188,1)',
+                                    pointHighlightFill: '#fff',
+                                    pointHighlightStroke: 'rgba(60,141,188,1)',
+                                    data : response.orden.data
+                                },
+                            ]
+                            
+                        }
+
+                        var barChartCanvas = $('#box-barra1').get(0).getContext('2d');
+                        var barChartData = $.extend(true, {}, areaChartData);
+                        var temp0 = areaChartData.datasets[0];
+                  
+
+                        areaChartData.datasets[0] = temp0;
+                    
+
+                        var barChartOptions = {
+                            responsive : true,
+                            maintainAspectRadio : false,
+                            datasetFill : false
+                            
+                        }
+
+                        new Chart(barChartCanvas,{
+                            type: 'bar',
+                            data: barChartData,
+                            options: barChartOptions   
+                        });
+
+                        $('#data-pre').removeClass('d-none');
+                        $('#eje-pre').text(response.orden.ejecucionPresupuestal);
+                   }
+                }
+            });  
+
+        });
     }
 
 
