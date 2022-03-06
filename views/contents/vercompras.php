@@ -160,9 +160,6 @@
                             <div class="card-footer bg-white">
                                 <p class="mb-0">Animal Helth Gracias por su compra</p>
                             </div>
-
-
-
                         </div>
                         <button class="btn btn-primary btn-sm" id="btn-imprimir" style="margin-top: 35px;">
                             <i class="far fa-file-pdf"></i> Imprimir</button>

@@ -171,10 +171,10 @@
                                 <input class="form-control" type="file" name="img" id="new-img-usuario"
                                     accept="image/*">
                             </div>
-                            <div class="col-12 col-md-6 form-group d-none" id="horario-doctor">
+                         <!--    <div class="col-12 col-md-6 form-group d-none" id="horario-doctor">
                                 <label for="">Horarios</label>
                                 <select id="new-horario" class="form-control"></select>
-                            </div>
+                            </div> -->
                         </div>
 
 

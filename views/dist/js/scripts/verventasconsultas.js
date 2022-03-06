@@ -4,6 +4,7 @@ $(function () {
 
     function _init() {
         cargarTabla();
+        imprimir();
     }
 
     function cargarTabla(){
@@ -73,6 +74,22 @@ $(function () {
         });
     }
 
+    function imprimir(){
+        $('#btn-imprimir').click(function(){
+   
+                let element = document.getElementById('detalle-ventas-imprimir');
+                let opt = {
+                margin:       0.5,
+                filename:     'facturaimprimir.pdf',
+                image:        { type: 'jpeg', quality: 3 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'mm', format: 'legal', orientation: 'portrait' }
+                };
+  
+                html2pdf().set(opt).from(element).save();
+        });
+    }
+
 });
 /*modal ver compra */
     function ver_detalleVenta(id){
@@ -122,3 +139,6 @@ $(function () {
             }
         });
     }
+   
+
+   

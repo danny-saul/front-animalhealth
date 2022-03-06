@@ -241,6 +241,36 @@
             <!-- /.col -->
         </div>
 
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                  
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <figure class="highcharts-figure">
+                                    <div id="container-speed-2" class="chart-container"></div>
+                                    <div id="container-por-2" class="chart-container"></div>
+
+                                </figure>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <figure class="highcharts-figure">
+                                    <div id="container-rpm-2" class="chart-container"></div>
+                                    <div id="container-por-3" class="chart-container"></div>
+                                </figure>
+                            </div>
+                        </div>
+               
+                    </div>
+                 
+                </div>
+           
+            </div>
+          
+        </div>
+
         <div class="row">
             <div class="col-12">
                 <div class="card card-danger shadow">
@@ -281,9 +311,126 @@
                                 </div>
                             </div>
                             <div id="data-pre" class="col-4 d-none">
-                                <h3>Ejecucion Presupuestal: </h3>
-                                <h2><b id="eje-pre"></b></h2>
+                                <div class="card card-outline-primary">
+                                    <div class="card-body">
+                                        <h3>Ejecucion Presupuestal: </h3>
+                                        <h2><b id="eje-pre"></b></h2>
+                                        <h3>Formula: </h3>
+                                        <h2><b id="formula-presupuestal"></b></h2>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-dark shadow">
+                    <div class="card-header">
+                        <h5 class="card-title text-center"><b>Regresion Lineal</b></h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-6 col-md-4 col-lg-3">
+                                <label for="">Año</label>
+                                <select class="form-control" name="" id="periodo-proyeccion">
+                                    <option value="0">Seleccione un Año</option>
+                                    <option value="2022">2022</option>
+                                </select>
+                            </div>
+                            <div class="col-6 col-md-4 col-lg-3" style="margin-top: 32px;">
+                                <button class="btn btn-outline-dark mx-1px text-95" id="consultar">
+                                    <i class="mr-1 fa fa-play text-white-m1 text-120 w-2">Consultar</i>
+                                </button>
+                            </div>
+                            <div id="num-dias" class="col-6 col-md-4 col-lg-2 ">
+                                <label for="">Ingrese el número de días</label>
+                                <input type="text" class="form-control numeros-vd" id="proy-dias" maxlength="3">
+                            </div>
+                            <div class="col-6 col-md-4 col-lg-3" style="margin-top: 32px;">
+                                <button class="btn btn-outline-dark mx-1px text-95" id="consultar-pro">
+                                    <i class="mr-1 fa fa-play text-white-m1 text-120 w-2">Proyectar</i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row" id="tabla-proy-venta">
+                            <div class="col-12">
+                                <div class="card card-primary card-outline shadow">
+                                    <div class="card-header">
+                                        <h5 class="card-title text-center"><b>Tabla de Datos</b></h5>
+                                    </div>
+                                    <div class="card-body table-responsive p-0">
+                                        <table class="table table-hover text-nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Total</th>
+                                                    <th>Fecha</th>
+                                                    <th>Cantidad</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="body-proy-venta">
+
+                                            </tbody>
+                                        </table>
+                                        <input type="hidden" id="const-a">
+                                        <input type="hidden" id="const-b">
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12 col-md-6">
+                                        <div class="card card-danger shadow">
+                                            <div class="card-header">
+                                                <h3 class="card-title">Diagrama de Dispersión</h3>
+
+                                                <div class="card-tools">
+                                                    <button type="button" class="btn btn-tool"
+                                                        data-card-widget="collapse">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="card-body" style="min-height: 250px; background: white;">
+                                                <div class="w-100" id="box-canva1">
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6">
+                                        <div class="card card-danger shadow">
+                                            <div class="card-header">
+                                                <h3 class="card-title">Proyección Lineal</h3>
+
+                                                <div class="card-tools">
+                                                    <button type="button" class="btn btn-tool"
+                                                        data-card-widget="collapse">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="card-body" style="min-height: 250px; background: white;">
+                                                <div class="w-100" id="box-canva2">
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
@@ -321,7 +468,6 @@
                 <div class="card card-primary shadow">
                     <div class="card-header">
                         <h3 class="card-title">Reporte de Compras y Ventas Anual</h3>
-
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                 <i class="fas fa-minus"></i>
@@ -331,11 +477,9 @@
                     <div class="card-body">
                         <div id="compras-reporte"></div>
                     </div>
-                    <!-- /.card-body -->
                 </div>
-
-
             </div>
+
             <div class="col-12 col-md-6">
                 <div class="card card-primary shadow">
                     <div class="card-header">
@@ -350,18 +494,14 @@
                     <div class="card-body">
                         <div id="stock-productos"></div>
                     </div>
-                    <!-- /.card-body -->
+
                 </div>
-
-
             </div>
         </div>
-        <!-- /.row -->
-    </div><!-- /.container-fluid -->
+    </div>
+    </div>
 </div>
-<!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
+
 
 <script src="<?=BASE?>views/plugins/chart.js/Chart.min.js"></script>
 <script src="<?=BASE?>views/plugins/moment/moment.min.js"></script>

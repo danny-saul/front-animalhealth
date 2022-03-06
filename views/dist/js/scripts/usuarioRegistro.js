@@ -9,7 +9,7 @@
         guardarUsuario();
         changecedula();
         cargardatosdoctor();
-        cargarHorario();
+       // cargarHorario();
         recuperarsexo();
         recuperarrol();
         editarCargarHorario();
@@ -329,7 +329,7 @@
             let direccion= $('#new-direccion').val();   
             let sexo_id = $('#new-sexo option:selected').val();
             let usuario= $('#new-usuario').val();  
-            let horarios_atencion_id = $('#new-horario option:selected').val();
+         //   let horarios_atencion_id = $('#new-horario option:selected').val();
             let password= $('#new-password').val();   
             let password2= $('#new-password').val();   
             let correo= $('#new-correo').val();   
@@ -355,9 +355,9 @@
                 },
                 doctor:{
                 },
-                doctorhorario:{
+              /*   doctorhorario:{
                     horarios_atencion_id
-                },
+                }, */
                 cliente:{
 
                 },

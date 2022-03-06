@@ -244,7 +244,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-6 col-md-3">
+                        <!--     <div class="col-6 col-md-3">
                                 <div class="small-box bg-info">
                                     <div class="inner">
                                         <h3 id="compra-descuento">0</h3>
@@ -255,7 +255,7 @@
                                         <i class="fas fa-dollar-sign"></i>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-6 col-md-3">
                                 <div class="small-box bg-info">
                                     <div class="inner">

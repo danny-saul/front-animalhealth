@@ -13,6 +13,8 @@ $(function () {
         reseteandodatos();
         fecha();
         cargarTabla();
+        buscarRaza();
+        buscar_cliente();
       
 
 
@@ -385,6 +387,101 @@ $(function () {
         });
     }
 
+
+    function buscarRaza(){
+        $('#buscar-raza').keyup(function(){
+            let texto = $('#buscar-raza').val();
+            $.ajax({
+                // la URL para la petición
+                url : urlServidor + 'raza/buscar/'+ texto,
+                // especifica si será una petición POST o GET
+                type : 'GET',
+                // el tipo de información que se espera de respuesta
+                dataType : 'json',
+                success : function(response) {
+                   console.log(response);
+                   if(response.status){
+                    let tr = '';
+                    let i = 1;
+                    response.raza.forEach(element => {
+                            tr += `<tr id="fila-raza-${element.id}">
+                                <td>${i}</td>
+                                <td style="display: none">${element.id}</td>
+                                <td>${element.raza}</td>
+                            
+                                <td>
+                                    <div class="div text-center">
+                                        <button data-dismiss="modal" class="btn btn-primary btn-sm" onclick="seleccionar_raza(${element.id})">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>`;
+                        i++;
+                        });
+                        $('#raza-body').html(tr);
+                    }else{
+                    $('#raza-body').html('No hay información disponible');
+                   }
+                },
+                error : function(jqXHR, status, error) {
+                    console.log('Disculpe, existió un problema');
+                },
+                complete : function(jqXHR, status) {
+                    // console.log('Petición realizada');
+                }
+            });
+        });
+    }
+
+    function buscar_cliente(){
+        $('#buscar-cliente').keyup(function(){
+            let texto = $('#buscar-cliente').val();
+            $.ajax({
+                // la URL para la petición
+                url : urlServidor + 'cliente/search/'+ texto,
+                // especifica si será una petición POST o GET
+                type : 'GET',
+                // el tipo de información que se espera de respuesta
+                dataType : 'json',
+                success : function(response) {
+                   console.log(response);
+                   if(response.status){
+                    let tr = '';
+                    let i = 1;
+                    response.cliente.forEach(element => {
+                            tr += `<tr id="fila-cliente-${element.id}">
+                                <td>${i}</td>
+                                <td style="display: none">${element.id}</td>
+                                <td>${element.cedula}</td>
+                                <td>${element.nombre}</td>
+                                <td>${element.apellido}</td>
+                                <td>${element.direccion}</td>
+                                <td>${element.telefono}</td>
+                                <td>
+                                    <div class="div text-center">
+                                        <button data-dismiss="modal" class="btn btn-primary btn-sm" onclick="seleccionar_cliente(${element.id})">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>`;
+                        i++;
+                        });
+                        $('#cliente-body').html(tr);
+                    }else{
+                    $('#cliente-body').html('No hay información disponible');
+                   }
+                },
+                error : function(jqXHR, status, error) {
+                    console.log('Disculpe, existió un problema');
+                },
+                complete : function(jqXHR, status) {
+                    // console.log('Petición realizada');
+                }
+            });
+        });
+    }
     
 
 

@@ -43,6 +43,7 @@ $(function(){
             dataType : 'json',
             success : function(response) {
                  console.log(response);
+              
                 
                if(response.status){
                    console.log(response.status);
@@ -63,7 +64,15 @@ $(function(){
                         message: response.mensaje,
                         type: 'danger'
                     }); */ 
-                    alert(response.mensaje);
+                    toastr.options = {
+                        "closeButton": true,
+                        "preventDuplicates": true,
+                        "positionClass": "toast-top-center",
+                    };
+        
+                    toastr["error"](response.mensaje, "Usuario")
+
+                    //alert(response.mensaje);
                }
             },
             error : function(xhr, status) {
@@ -92,7 +101,7 @@ $(function(){
                 "preventDuplicates": true,
                 "positionClass": "toast-top-center",
             };
-            toastr["error"]('Ingrese su contrasenia', "Login")
+            toastr["error"]('Ingrese su contraseña', "Login")
          
             return false;
         }else

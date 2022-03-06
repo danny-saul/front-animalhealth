@@ -7,6 +7,9 @@ $(function () {
         iniciar_grafico();
         kpisatisfaccion();
         kpi_ventas();
+        proyeccionVenta();
+        calcular_dias();
+        kpisproductoservicio();
     }
 
     function cargandoDatos() {
@@ -379,7 +382,7 @@ $(function () {
             // el tipo de información que se espera de respuesta
             dataType: 'json',
             success: function (response) {
-                console.log(response);
+                //console.log(response);
                 if (response) {
                     var gaugeOptions = {
                         chart: {
@@ -477,7 +480,7 @@ $(function () {
                             min: 0,
                             max: 100,
                             title: {
-                                text: 'CSAT (Porcentaje) (%)'
+                                text: 'CSAT (Porcentaje) (%) Indicador '
                             }
                         },
     
@@ -492,7 +495,7 @@ $(function () {
                                 format:
                                     '<div style="text-align:center">' +
                                     '<span style="font-size:25px">{y}</span><br/>' +
-                                    '<span style="font-size:12px;opacity:0.4">Sastifacion del cliente</span>' +
+                                    '<span style="font-size:12px;opacity:0.4">Nivel de Sastifaccion</span>' +
                                     '</div>'
                             },
                             tooltip: {
@@ -578,6 +581,215 @@ $(function () {
 
     }
 
+    function kpisproductoservicio() {
+        $.ajax({
+            // la URL para la petición
+            url: urlServidor + 'evaluar_servicio/evaluar_serviciokpi',
+            // especifica si será una petición POST o GET
+            type: 'GET',
+            // el tipo de información que se espera de respuesta
+            dataType: 'json',
+            success: function (response) {
+                //console.log(response);
+                if (response) {
+                    var gaugeOptions = {
+                        chart: {
+                            type: 'solidgauge'
+                        },
+    
+                        title: null,
+    
+                        pane: {
+                            center: ['50%', '85%'],
+                            size: '140%',
+                            startAngle: -90,
+                            endAngle: 90,
+                            background: {
+                                backgroundColor:
+                                    Highcharts.defaultOptions.legend.backgroundColor || '#EEE',
+                                innerRadius: '60%',
+                                outerRadius: '100%',
+                                shape: 'arc'
+                            }
+                        },
+    
+                        exporting: {
+                            enabled: false
+                        },
+    
+                        tooltip: {
+                            enabled: false
+                        },
+    
+                        // the value axis
+                        yAxis: {
+                            stops: [
+                                [0.1, '#55BF3B'], // green
+                                [0.5, '#DDDF0D'], // yellow
+                                [0.9, '#DF5353'] // red
+                            ],
+                            lineWidth: 0,
+                            tickWidth: 0,
+                            minorTickInterval: null,
+                            tickAmount: 2,
+                            title: {
+                                y: -70
+                            },
+                            labels: {
+                                y: 16
+                            }
+                        },
+    
+                        plotOptions: {
+                            solidgauge: {
+                                dataLabels: {
+                                    y: 5,
+                                    borderWidth: 0,
+                                    useHTML: true
+                                }
+                            }
+                        }
+                    };
+    
+                    // The speed gauge
+                    var chartSpeed = Highcharts.chart('container-speed-2', Highcharts.merge(gaugeOptions, {
+                        yAxis: {
+                            min: 0,
+                            max: 100,
+                            title: {
+                                text: 'CSAT (Promedio) (+)'
+                            }
+                        },
+    
+                        credits: {
+                            enabled: false
+                        },
+    
+                        series: [{
+                            name: 'Positivo',
+                            data: response.data,
+                            dataLabels: {
+                                format:
+                                    '<div style="text-align:center">' +
+                                    '<span style="font-size:25px">{y}</span><br/>' +
+                                    '<span style="font-size:12px;opacity:0.4">Satisfacción de Servicio</span>'+
+                                    '</div>' 
+                            },
+                            tooltip: {
+                                valueSuffix: ' km/h'
+                            }
+                        }]
+
+            
+                    }));
+
+                    var chartPor1 = Highcharts.chart('container-por-2', Highcharts.merge(gaugeOptions, {
+                        yAxis: {
+                            min: 0,
+                            max: 100,
+                            title: {
+                                text: 'CSAT (Porcentaje) (%)'
+                            }
+                        },
+    
+                        credits: {
+                            enabled: false
+                        },
+    
+                        series: [{
+                            name: 'Positivo',
+                            data: response.datapor,
+                            dataLabels: {
+                                format:
+                                    '<div style="text-align:center">' +
+                                    '<span style="font-size:25px">{y}</span><br/>' +
+                                    '<span style="font-size:12px;opacity:0.4">Calidad de Servicio</span>' +
+                                    '</div>'
+                            },
+                            tooltip: {
+                                valueSuffix: ' km/h'
+                            }
+                        }]
+    
+                    }));
+    
+                    // The RPM gauge
+                    var chartRpm = Highcharts.chart('container-rpm-2', Highcharts.merge(gaugeOptions, {
+                        yAxis: {
+                            min: 0,
+                            max: 100,
+                            title: {
+                                text: 'CSAT (Promedio) (-)' 
+                            }
+                        },
+
+                        credits: {
+                            enabled: false
+                        },
+    
+                        series: [{
+                            name: 'Negativo',
+                            data: response.data2,
+                            dataLabels: {
+                                format:
+                                '<div style="text-align:center">' +
+                                '<span style="font-size:25px">{y}</span><br/>' +
+                                '<span style="font-size:12px;opacity:0.4">Insastifacion Servicio </span>' +
+                                '</div>'
+                            },
+                            tooltip: {
+                                valueSuffix: ' revolutions/min'
+                            }
+                        }]
+    
+                    }));
+
+               
+
+                    var chartPor2 = Highcharts.chart('container-por-3', Highcharts.merge(gaugeOptions, {
+                        yAxis: {
+                            min: 0,
+                            max: 100,
+                            title: {
+                                text: 'CSAT (Porcentaje) (%)'
+                            }
+                        },
+    
+                        credits: {
+                            enabled: false
+                        },
+    
+                        series: [{
+                            name: 'Positivo',
+                            data: response.datapor2,
+                            dataLabels: {
+                                format:
+                                    '<div style="text-align:center">' +
+                                    '<span style="font-size:25px">{y}</span><br/>' +
+                                    '<span style="font-size:12px;opacity:0.4">Insastifacion de Servicio</span>' +
+                                    '</div>'
+                            },
+                            tooltip: {
+                                valueSuffix: ' km/h'
+                            }
+                        }]
+    
+                    }));
+
+                }
+
+            },
+            error: function (jqXHR, status, error) {
+                console.log('Disculpe, existió un problema');
+            },
+            complete: function (jqXHR, status) {
+                // console.log('Petición realizada');
+            }
+        });
+
+    }
+
+
     function kpi_ventas(){
         $('#btn-consulta').click(function(){
             let fecha_inicio = $('#fecha-inicio-kpi').val();
@@ -661,12 +873,179 @@ $(function () {
 
                         $('#data-pre').removeClass('d-none');
                         $('#eje-pre').text(response.orden.ejecucionPresupuestal);
+                        $('#formula-presupuestal').text(response.orden.formula);
                    }
                 }
             });  
 
         });
     }
+
+    function proyeccionVenta(){
+
+        $('#consultar').click(function(){
+            let anio = $('#periodo-proyeccion option:selected').val(); 
+
+            toastr.options = {
+                "closeButton": true,
+                "preventDuplicates": true,
+                "positionClass": "toast-top-center",
+            };
+
+            if(anio == '0'){
+                toastr["warning"]('Seleccione un año', "Año");
+            }else{
+                $.ajax({
+                    url: urlServidor + 'ventas/regresion/' + anio,
+                    type: 'GET',
+                    dataType: 'json',
+                        success: function (response) {
+                       console.log(response);
+
+                       if(response.status){
+                           let tr = '';
+                           let i =1;
+                           response.tabla.forEach(e => {
+                               tr += `<tr>
+                                        <td>${i}</td>
+                                        <td>${e.ventatotal}</td>
+                                        <td>${e.fecha}</td>
+                                        <td>${e.cantidad}</td>
+                                    </tr>`;
+                                    i++;
+                           });
+                        
+                           $('#body-proy-venta').html(tr);
+                           $('#const-a').val(response.data.constante.a);
+                           $('#const-b').val(response.data.constante.b);
+
+                           /* Canvas 1 */
+                           $('#box-canva1').html('');
+                           let canvas1 =   ` <canvas id="dispersion-box"
+                           style="min-height: 250px; height: 250px; max-height: 300px; max-width: 100%; margin-top: 22px"></canvas>`;
+                            $('#box-canva1').html(canvas1);
+
+                            let elementCanvas = document.getElementById('dispersion-box').getContext('2d');
+                            
+                            const data = {
+                              labels: response.borbuja.labels,
+                              datasets: [
+                                {
+                                  label: 'Ventas',
+                                  data: response.borbuja.data,
+                                  //borderColor: Utils.CHART_COLORS.red,
+                                  backgroundColor: ["#fe0612", "#fff706","#282f34","#009000","#fff706", "#fe0612","#282f34","#009000","#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#fff706", "#fe0612","#282f34","#009000","#fff706", "#fe0612","#282f34","#009000","#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                                }
+                              ]
+                            };
+                            
+                            const config = {
+                              type: 'bubble',
+                              data: data,
+                              options: {
+                                responsive: true,
+                                plugins: {
+                                  legend: {
+                                    position: 'top',
+                                  },
+                                  title: {
+                                    display: true,
+                                    text: 'Chart.js Bubble Chart'
+                                  }
+                                }
+                              },
+                            };
+                            const burbuga = new Chart(
+                              elementCanvas, config
+                            )
+                       }
+                      
+                    }
+                });
+
+            }
+        });
+
+    }
+
+    function calcular_dias(){
+        $('#consultar-pro').click(function(){
+          let dias = $('#proy-dias').val();
+          let srt_dias = dias;
+          dias = parseInt(dias);
+
+          toastr.options = {
+            "closeButton": true,
+            "preventDuplicates": true,
+            "positionClass": "toast-top-center",
+        };
+  
+          if(srt_dias.length == 0){
+
+            toastr["warning"]('Debe ingresar el número de día', "Proyección");
+          }else
+          if(dias == 0){
+            toastr["warning"]('El número de días debe ser mayor a cero', "Proyección");
+          }else
+          if(dias > 0){
+            let a = parseInt($('#const-a').val());
+            let b = parseInt($('#const-b').val());
+            let x = dias;
+            let datos = [];
+            let labels = [];
+            for (let i = 1; i <= x; i++) {
+              labels.push(i);
+              let fx = a + (b * i);
+              datos.push(fx);
+            }
+  
+  
+            /* Canvas 1 */
+            $('#box-canva2').html('');
+            let canvas2 =   ` <canvas id="grafica-box"
+            style="min-height: 250px; height: 250px; max-height: 300px; max-width: 100%; margin-top: 22px"></canvas>`;
+             $('#box-canva2').html(canvas2);
+  
+             let elementCanvas = document.getElementById('grafica-box').getContext('2d');
+  
+             const data = {
+              labels: labels,
+              datasets: [
+                {
+                  label: 'Proyección Ventas en días',
+                  data: datos,
+                  backgroundColor: '#fff706',
+                  backgroundColor : "rgba(0,0,0,0.5)",
+                  fill: false
+                }
+              ]
+            };
+            
+            const config = {
+              type: 'line',
+              data: data,
+              options: {
+                responsive: true,
+                plugins: {
+                  legend: {
+                    position: 'top',
+                  },
+                  title: {
+                    display: true,
+                    text: 'Chart.js Bubble Chart'
+                  }
+                }
+              },
+            };
+            const burbuga = new Chart(
+              elementCanvas, config
+            )
+  
+          }
+        });
+      }
+
+      
 
 
 

@@ -80,7 +80,7 @@
             <div class="modal-body">
                 <div class="col-12">
                     <div class="">
-                        <div class="card">
+                        <div class="card" id="detalle-ventas-imprimir">
                             <div class="card-header p-4">
                                 <a class="pt-2 d-inline-block" data-abc="true">Nota de Venta: # <span id="venta-numero"></span></a>
                                 <div class="float-right">
@@ -162,6 +162,8 @@
                                 <p class="mb-0">Animal Helth Gracias por su venta</p>
                             </div>
                         </div>
+                        <button class="btn btn-primary btn-sm" id="btn-imprimir" style="margin-top: 35px;">
+                            <i class="far fa-file-pdf"></i> Imprimir</button>
                     </div>
                 </div>
             </div>
@@ -182,6 +184,7 @@
 <script src="<?=BASE?>views/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
 <script src="<?=BASE?>views/plugins/jszip/jszip.min.js"></script>
 <script src="<?=BASE?>views/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="<?=BASE?>views/plugins/html2pdf/html2pdf.bundle.js"></script>
 
 
 <script src="<?=BASE?>views/plugins/Toast/js/Toast.min.js"></script>

@@ -152,7 +152,7 @@
 
                                             </div>
 
-                        <!--                     <div class="col-12 text-right">
+                                            <!--                     <div class="col-12 text-right">
                                                 <button class="btn btn-primary btn-sm" id="abrir-preguntas"><i
                                                         class="fa fa-search mr-2"></i>KPI</button>
 
@@ -354,27 +354,32 @@
                         <div class="tabla-buscar-mascota">
                             <h5>Como evaluaria su sastifaccion respecto al servicio entregado?</h5>
                             <div class="card-body">
-                            <form action="">
-                                <div class="row">
-                                    <div class="col-12 col-md-6 form-group  " id="hora-cita-a">
-                                        <label for="">Servicio al Cliente</label>
-                                        <select id="new-kpi-pregunta" class="form-control"></select>
-                                    </div>
-                                
-                                </div>
-
-                            </form>
-
-                            <div class="row">
-                                        <div class="col-12 btn-center">
-                                            <button style="margin-top: 18px;" id="btn-guardar-kpi-cliente"
-                                                class="btn btn-block btn-outline-primary">Guardar</button>
+                                <form action="">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 form-group  " id="hora-cita-a">
+                                            <label for="">Evalue su atencion recibida por nuestro equipo veterinario</label>
+                                            <select id="new-kpi-pregunta" class="form-control"></select>
                                         </div>
+
+                                        <div class="col-12 col-md-6 form-group  " id="hora-cita-a">
+                                            <label for="">Cómo calificarías tu experiencia general con nuestros productos y servicios</label>
+                                            <select id="new-kpi-producto" class="form-control"></select>
+                                        </div>
+
                                     </div>
+
+                                </form>
+
+                                <div class="row">
+                                    <div class="col-12 btn-center">
+                                        <button style="margin-top: 18px;" id="btn-guardar-kpi-cliente"
+                                            class="btn btn-block btn-outline-primary">Guardar</button>
+                                    </div>
+                                </div>
                             </div>
 
 
-                      
+
                         </div>
                     </div>
                 </div>

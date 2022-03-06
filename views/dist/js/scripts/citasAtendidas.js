@@ -4,6 +4,7 @@
 
     function _init(){
         citasAtendidas();
+        imprimir();
     }
 
     /*function citasAtendidas(){
@@ -111,6 +112,24 @@
         });
 
     }
+
+    function imprimir(){
+        $('#btn-imprimir').click(function(){
+   
+                let element = document.getElementById('detalle-receta-imprimir');
+                let opt = {
+                margin:       0.5,
+                filename:     'facturaimprimir.pdf',
+                image:        { type: 'jpeg', quality: 3 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'mm', format: 'legal', orientation: 'portrait' }
+                };
+  
+                html2pdf().set(opt).from(element).save();
+        });
+    }
+
+    
 
 /* }); */
 

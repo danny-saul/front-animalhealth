@@ -46,6 +46,7 @@
                                         <th>Doctor</th>
                                         <th>Servicio</th>
                                         <th>Hora</th>
+                                        <th>Fecha</th>
                                         <th>Estado Cita</th>
                                     </tr>
                                 </thead>
@@ -227,7 +228,7 @@
                         <div class="form-group">
                             <input type="hidden" id="mascota-id">
                             <label for="">Buscar Mascota</label>
-                            <input id="buscar-mascota" type="text" class="form-control"
+                            <input id="buscar-mascota-m" type="text" class="form-control"
                                 placeholder="Ingrese el nombre de la Mascota">
                         </div>
                     </div>
@@ -315,4 +316,4 @@
 <script src="<?=BASE?>views/plugins/pdfmake/pdfmake.min.js"></script>
 
 <script src="<?=BASE?>views/plugins/Toast/js/Toast.min.js"></script>
-<script src="<?=BASE?>views/dist/js/scripts/agendarCitas.js?ver=1.1.1.6"></script>
+<script src="<?=BASE?>views/dist/js/scripts/agendarCitas.js?ver=1.1.1.7"></script>

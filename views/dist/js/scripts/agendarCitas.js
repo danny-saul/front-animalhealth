@@ -11,6 +11,7 @@ $(function () {
         guardarCita();
         cargarTabla();
         cargardatahorario();
+        buscar_mascota();
     //    validarDias();
    
     }
@@ -303,6 +304,57 @@ $(function () {
     function cargardatahorario() {
 
     }
+
+    function buscar_mascota(){
+        $('#buscar-mascota-m').keyup(function(){
+            let texto = $('#buscar-mascota-m').val();
+            $.ajax({
+                // la URL para la petición
+                url : urlServidor + 'mascota/buscar/'+ texto,
+                // especifica si será una petición POST o GET
+                type : 'GET',
+                // el tipo de información que se espera de respuesta
+                dataType : 'json',
+                success : function(response) {
+                   console.log(response);
+                   if(response.status){
+                    let tr = '';
+                    let i = 1;
+                    response.mascota.forEach(element => {
+                            tr += `<tr id="fila-mascota-${element.id}">
+                                <td>${i}</td>
+                                <td style="display: none">${element.id}</td>
+                                <td>${element.nombre}</td>
+                                <td>${element.nombre_tipo}</td>
+                                <td>${element.genero}</td>
+                                <td>${element.raza}</td>
+                                <td>${element.edad}</td>
+                               
+                                <td>
+                                    <div class="div text-center">
+                                        <button data-dismiss="modal" class="btn btn-primary btn-sm" onclick="seleccionar_mascota(${element.id})">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>`;
+                        i++;
+                        });
+                        $('#mascota-body').html(tr);
+                    }else{
+                    $('#mascota-body').html('No hay información disponible');
+                   }
+                },
+                error : function(jqXHR, status, error) {
+                    console.log('Disculpe, existió un problema');
+                },
+                complete : function(jqXHR, status) {
+                    // console.log('Petición realizada');
+                }
+            });
+        });
+    }
+    
 
 });
 

@@ -18,6 +18,7 @@ $(function () {
 
        guardarkpi();
       // cargarquestionkapei();
+      guardarkpiservicio();
 
 
     
@@ -604,7 +605,8 @@ $(function () {
                     toastr["success"](response.mensaje, "Citas")
                     reseteandodatos(); 
                     cargarTabla();  
-                    cargarquestionkapei();         
+                    cargarquestionkapei();   
+                    cargarquestionkapeiservicio();      
                 } else {
                     toastr["error"](response.mensaje, "Citas")
                 }
@@ -710,6 +712,37 @@ $(function () {
     
     }
 
+    function cargarquestionkapeiservicio() {
+      
+        $('#modal-kpi-evaluacion').modal('show');
+
+        $.ajax({
+            url: urlServidor + 'detalle/listardetalle',
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                // console.log(response);
+                if (response.status) {
+                    let option = '<option value="0">Seleccione Grado de Sastifaccion </option>';
+                    response.detalle.forEach(element => {
+                        option += `<option value=${element.id}>${element.detalle}</option>`;
+                    });
+
+                    $('#new-kpi-producto').html(option);
+
+                }
+            },
+            error: function (jqXHR, status, error) {
+                console.log('Disculpe, existió un problema');
+            },
+            complete: function (jqXHR, status) {
+                // console.log('Petición realizada');
+            }
+        });
+   
+   
+
+}
 
   
     function guardarkpi() {
@@ -797,6 +830,96 @@ $(function () {
 
     } 
     
+
+
+    //guardar servicio calificacion
+
+    function guardarkpiservicio() {
+        $('#btn-guardar-kpi-cliente').click(function (e) {
+
+            let cliente_id =$('#c-cli-id-c').val();
+            let detalle_id = $('#new-kpi-producto option:selected').val();
+            let valoracion = '';
+            
+
+            toastr.options = {
+                "closeButton": true,
+                "preventDuplicates": true,
+                "positionClass": "toast-top-center",
+            };
+
+
+            if(cliente_id == 0){
+                toastr["warning"]("Selecione un Cliente", "Cliente");
+            }else
+            if(detalle_id == 0){
+                toastr["warning"]("Selecione un Detalle", "Detalle");
+            }else
+            if(detalle_id >= 3 && detalle_id < 6){
+                valoracion = 'P';
+            }else 
+            if(detalle_id <=3){
+                valoracion = 'N';
+            }
+                let json = {
+                    evaluar_servicio: {
+                        cliente_id,
+                        detalle_id,
+                        valoracion
+                
+                    },
+                };
+              //  console.log(json);
+
+            
+   
+          
+            //validacion para datos de usuario
+           // if (!validarCita(json)) {
+        
+           // } else {
+            guardandokpievaluacionservicio(json);
+               $('#modal-kpi-evaluacion').modal('hide');
+
+        //    }
+        
+        });
+    }
+
+    function guardandokpievaluacionservicio(json){
+
+        $.ajax({
+            url: urlServidor + 'evaluar_servicio/guardar',
+            type: 'POST',
+            data: 'data=' + JSON.stringify(json),
+            dataType: 'json',
+            success: function (response) {
+                //    console.log(response);
+                toastr.options = {
+                    "closeButton": true,
+                    "preventDuplicates": true,
+                    "positionClass": "toast-top-center",
+                };
+
+                if (response.status) {
+                    toastr["success"](response.mensaje, "kpi")
+                //    reseteandodatos(); 
+                  //  cargarTabla();           
+                } else {
+                    toastr["error"](response.mensaje, "kpi")
+                }
+            },
+            error: function (jqXHR, status, error) {
+                console.log('Disculpe, existió un problema');
+            },
+            complete: function (jqXHR, status) {
+                // console.log('Petición realizada');
+            }
+        });
+
+    } 
+    
+
 
    
 

@@ -10,12 +10,14 @@
          agregar_producto_item();
         guardarVentas();
         cargarIva();
-        
+        buscar_cliente();
+        buscar_producto();
       
        
         calcular_descuento();
         reset_productos();
         reset_datos();
+
     }
 
     function cargarCliente() {
@@ -311,6 +313,110 @@
         });
 
     }
+
+    function buscar_cliente(){
+        $('#buscar-clientes').keyup(function(){
+            let texto = $('#buscar-clientes').val();
+            $.ajax({
+                // la URL para la petición
+                url : urlServidor + 'cliente/search/'+ texto,
+                // especifica si será una petición POST o GET
+                type : 'GET',
+                // el tipo de información que se espera de respuesta
+                dataType : 'json',
+                success : function(response) {
+                   console.log(response);
+                   if(response.status){
+                    let tr = '';
+                    let i = 1;
+                    response.cliente.forEach(element => {
+                            tr += `<tr id="fila-cliente-${element.id}">
+                                <td>${i}</td>
+                                <td style="display: none">${element.id}</td>
+                                <td>${element.cedula}</td>
+                                <td>${element.nombre}</td>
+                                <td>${element.apellido}</td>
+                                <td>${element.telefono}</td>
+                                <td>${element.direccion}</td>
+                                <td>
+                                    <div class="div text-center">
+                                        <button data-dismiss="modal" class="btn btn-primary btn-sm" onclick="seleccionar_cliente(${element.id})">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>`;
+                        i++;
+                        });
+                        $('#cliente-body').html(tr);
+                    }else{
+                    $('#cliente-body').html('No hay información disponible');
+                   }
+                },
+                error : function(jqXHR, status, error) {
+                    console.log('Disculpe, existió un problema');
+                },
+                complete : function(jqXHR, status) {
+                    // console.log('Petición realizada');
+                }
+            });
+        });
+    }
+
+         
+    function buscar_producto(){
+        $('#buscar-producto').keyup(function(){
+            let texto = $('#buscar-producto').val();
+            $.ajax({
+                // la URL para la petición
+                url : urlServidor + 'producto/search/'+ texto,
+                // especifica si será una petición POST o GET
+                type : 'GET',
+                // el tipo de información que se espera de respuesta
+                dataType : 'json',
+                success : function(response) {
+                   console.log(response);
+                   if(response.status){
+                    let tr = '';
+                    let i = 1;
+                    response.producto.forEach(element => {
+                            tr += `<tr id="fila-producto-${element.id}">
+                                <td>${i}</td>
+                                <td style="display: none">${element.id}</td>
+                                <td>${element.codigo}</td>
+                                <td>${element.nombre_producto}</td>
+                                <td>${element.nombre}</td>
+                                <td>${element.stock}</td>
+                                <td>${element.precio_venta}</td>
+                        
+                         
+                                <td>
+                                    <div class="div text-center">
+                                        <button data-dismiss="modal" class="btn btn-primary btn-sm" onclick="seleccionar_producto(${element.id})">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>`;
+                        i++;
+                        });
+                        $('#producto-body').html(tr);
+                    }else{
+                    $('#producto-body').html('No hay información disponible');
+                   }
+                },
+                error : function(jqXHR, status, error) {
+                    console.log('Disculpe, existió un problema');
+                },
+                complete : function(jqXHR, status) {
+                    // console.log('Petición realizada');
+                }
+            });
+        });
+    }
+    
+    
+
     
 //});
 
@@ -323,8 +429,8 @@ function seleccionar_cliente(id) {
     let cedula = f[2].innerText;
     let nombre = f[3].innerText;
     let apellido = f[4].innerText;
-    let direccion = f[5].innerText;
-    let telefono = f[6].innerText;
+    let telefono = f[5].innerText;
+    let direccion = f[6].innerText;
 
     $('#c-cli-id').val(id);
     $('#c-venta-cedula').val(cedula);

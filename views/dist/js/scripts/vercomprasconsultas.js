@@ -77,7 +77,7 @@ $(function () {
     function imprimir(){
         $('#btn-imprimir').click(function(){
    
-                let element = document.getElementById('detalle-compra-imprimir"');
+                let element = document.getElementById('detalle-compra-imprimir');
                 let opt = {
                 margin:       0.5,
                 filename:     'facturaimprimir.pdf',
