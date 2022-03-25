@@ -19,6 +19,8 @@ $(function () {
        guardarkpi();
       // cargarquestionkapei();
       guardarkpiservicio();
+      imprimir();
+ 
 
 
     
@@ -1116,3 +1118,83 @@ function cancelar_cita(id_cita,estado_id){
         }
     });
 }
+
+function ver_cita(id_cita){
+    $('#modal-ver-cita').modal('show');
+    $.ajax({
+        // la URL para la petición
+        url : urlServidor + 'citas/listar/' + id_cita,
+        // especifica si será una petición POST o GET
+        type : 'GET',
+        // el tipo de información que se espera de respuesta
+        dataType : 'json',
+        success : function(response) {
+            //console.log(response);
+            let tr = '';
+            if(response.status){
+          /*       let compra_id = response.compra.id;
+                let codigo = response.compra.codigo_compra;
+                let fecha_entrega = response.compra.fecha_entrega;
+                
+                let proveedor_razon_social = response.compra.proveedor.razon_social;
+                let proveedor_direccion = response.compra.proveedor.direccion;
+                let proveedor_correo = response.compra.proveedor.correo;
+                
+                let compra_subtotal = response.compra.subtotal;
+                let compra_descuento = response.compra.descuento;
+                let compra_iva = response.compra.iva;
+                let compra_total = response.compra.total;
+                 */
+
+                $('#cita-cliente-nombre').text(response.citas.cliente.persona.nombre +' '+ response.citas.cliente.persona.apellido);
+                $('#cita-cliente-cedula').text(response.citas.cliente.persona.cedula);
+                $('#cita-cliente-fecha').text(response.citas.horarios_atencion.fecha);
+                $('#cita-cliente-hora').text(response.citas.horarios_atencion.horario);
+                $('#cita-cliente-mascota').text(response.citas.mascota.nombre);
+                $('#cita-cliente-doctor').text(response.citas.doctor.persona.nombre +' '+ response.citas.doctor.persona.apellido);
+                
+               /*  $('#compra_descuento').text(compra_descuento);
+                $('#compra_iva').text(compra_iva);
+                $('#compra_subtotal').text(compra_subtotal);
+                <td style="color: black;">${i+1} </td>
+                $('#compra_total').text(compra_total); */
+                
+            /*     response.servicios.forEach((element, i) => { */
+                    tr += `<tr>
+                                <td style="color: black;">${response.citas.servicios.nombre_servicio}</td>
+                                <td style="color: black;">${response.citas.estado_cita.detalle}</td>
+                                <td style="color: black;">${response.citas.servicios.precio}</td>
+                       
+                            </tr>`;
+      /*       }); */
+ 
+            $('#body_detalle_compra').html(tr);
+            }
+        },
+        error : function(jqXHR, status, error) {
+            console.log('Disculpe, existió un problema');
+        },
+        complete : function(jqXHR, status) {
+            // console.log('Petición realizada');
+        }
+    });
+}
+
+
+function imprimir(){
+    $('#btn-imprimir').click(function(){
+
+            let element = document.getElementById('factura-cita');
+            let opt = {
+            margin:       0.5,
+            filename:     'facturaimprimir.pdf',
+            image:        { type: 'jpeg', quality: 3 },
+            html2canvas:  { scale: 2 },
+            jsPDF:        { unit: 'mm', format: 'legal', orientation: 'portrait' }
+            };
+
+            
+            html2pdf().set(opt).from(element).save();
+        });
+    }
+
